@@ -1,0 +1,14 @@
+# OS / editor cruft
+.DS_Store
+
+# Working backups and annotated revision notes (internal)
+*.bak
+
+# Build / source material: rendered source-slide PNGs and source PDFs.
+# Not used by the live talk or intro decks.
+source_extracts/
+docs/img/talk/
+docs/img/reference/
+
+# Older "reference edition" deck (depends on the excluded source-slide renders)
+docs/slides-tamper-reference.html

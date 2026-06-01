@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f1b300" />
+    <title>Beyond the Hype: Using Generative AI in Public Administration Research</title>
+    <meta name="description" content="Introduction to PMRC 2026 Pre-Conference Workshop 4, Beyond the Hype: Using Generative AI in Public Administration Research. Sponsored by IIDS, University of Idaho." />
+    <link rel="stylesheet" href="reveal/dist/reveal.css" />
+    <link rel="stylesheet" href="reveal/dist/theme/white.css" />
+    <link rel="stylesheet" href="slides.css" />
+    <link rel="stylesheet" href="tamper.css" />
+    <style>
+      /* ── Intro-deck-scoped styling (does not touch the shared stylesheets) ── */
+
+      /* font_size_best_practices.md Priority 1: lift the base 24px -> 28px.
+         Scoped to this file, so the shared TaMPER deck is unaffected. Every
+         em-anchored size below cascades from this base. */
+      .reveal { font-size: 28px; }
+
+      /* Priority 2/3: lift the smallest caption/label roles off the floor and
+         darken thin greys so the size gain is not undercut by faint strokes. */
+      .reveal .slide-kicker { font-size: 0.85em; }
+      .reveal .silver-note { font-size: 0.92em; color: #404040; }
+      .reveal a.cite, .reveal .cite, .reveal .hs-cite a { font-size: 0.85em; }
+
+      /* Prominent IIDS sponsorship badge on the title slide (filled gold,
+         dark text -> ~10:1 contrast, vs faint gold-on-white text). */
+      .reveal .title-sponsor { margin: 0; }
+      .reveal .title-sponsor span {
+        display: inline-block; background: #f1b300; color: #191919;
+        font-weight: 700; font-size: 1.05em; line-height: 1.3;
+        padding: 0.4em 0.9em; border-radius: 0.4em;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      /* Linked IIDS gold badge on the sponsorship slide. Same treatment as the
+         title slide's sponsor badge: filled gold, dark bold text, high contrast. */
+      .reveal .iids-badge {
+        display: inline-block; background: #f1b300; color: #191919;
+        font-weight: 700; font-size: 1.2em; line-height: 1.3; text-decoration: none;
+        padding: 0.45em 1em; border-radius: 0.45em;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        transition: box-shadow 0.15s ease, transform 0.15s ease;
+      }
+      .reveal .iids-badge:hover { box-shadow: 0 5px 16px rgba(241, 179, 0, 0.45); transform: translateY(-1px); }
+
+      .reveal .slides section .slide-card { text-align: left; }
+
+      /* Presenter columns: circular headshot ABOVE the card */
+      .reveal .pcol { display: flex; flex-direction: column; align-items: stretch; }
+      .reveal .pcard-photo {
+        width: 168px; height: 168px; align-self: center;
+        border-radius: 50%; object-fit: cover; object-position: center;
+        border: 3px solid #f1b300; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        margin-bottom: 0.7rem;
+      }
+      .reveal .pcol .slide-card { box-sizing: border-box; flex: 1 1 auto; }
+      .reveal .pcard .pcard-name { margin: 0; font-size: 1.1em; font-weight: 700; line-height: 1.15; }
+      .reveal .pcard .pcard-name a {
+        color: #191919; text-decoration: none; border-bottom: 2px solid #f1b300;
+      }
+      .reveal .pcard .pcard-name a:hover { color: #f1b300; }
+      .reveal .pcard .pcard-org { margin: 0.2em 0 0.55em; font-size: 0.9em; color: #595959; }
+      .reveal .pcard .pcard-titles { margin: 0; font-size: 0.92em; line-height: 1.42; color: #404040; }
+
+      /* Vertical timeline agenda (em-anchored so it scales with the base) */
+      .reveal .agenda { position: relative; max-width: 1180px; margin: 0.4rem auto 0; text-align: left; }
+      .reveal .agenda::before {
+        content: ""; position: absolute; left: 152px; top: 16px; bottom: 16px;
+        width: 2px; background: #e7e7e7; z-index: 0;
+      }
+      .reveal .ag-group {
+        margin: 0.55em 0 0.35em; font-size: 0.85em; font-weight: 800;
+        letter-spacing: 0.12em; text-transform: uppercase; color: #f1b300;
+      }
+      .reveal .ag-group:first-child { margin-top: 0; }
+      .reveal .ag-item {
+        display: grid; grid-template-columns: 130px 18px 1fr;
+        column-gap: 14px; align-items: start; padding: 0.28em 0;
+      }
+      .reveal .ag-time {
+        text-align: right; font-weight: 700; color: #191919;
+        font-size: 0.92em; white-space: nowrap; padding-top: 0.05em;
+      }
+      .reveal .ag-dot {
+        width: 14px; height: 14px; margin: 0.32em auto 0; border-radius: 50%;
+        background: #f1b300; box-shadow: 0 0 0 3px #ffffff; position: relative; z-index: 1;
+      }
+      .reveal .ag-dot.muted { background: #c9c9c9; }
+      .reveal .ag-title { margin: 0; font-size: 1.0em; font-weight: 700; line-height: 1.2; color: #191919; }
+      .reveal .ag-who { margin: 0.08em 0 0; font-size: 0.85em; color: #595959; }
+      .reveal .ag-desc { margin: 0.1em 0 0; font-size: 0.82em; color: #4d4d4d; line-height: 1.35; }
+
+      /* ── Layout + chrome ──
+         Top-anchor content slides so every heading sits at a consistent Y
+         (kills the floating/jumping), and frame each slide with a gold edge
+         stripe + a footer so the surrounding margin reads as intentional. */
+      /* Vertically center every slide (except the title, which has its own
+         full-height layout) so leftover space is balanced rather than dumped
+         at the bottom. flex !important beats reveal's inline display:block;
+         align-items:stretch keeps full-width children (card grids) full width. */
+      .reveal .slides > section:not(.title-a) {
+        min-height: 760px; display: flex !important; flex-direction: column;
+        justify-content: center; align-items: stretch;
+      }
+      /* Sparse "scope" card slides: tall, filled cards with an icon so the row
+         occupies the slide instead of leaving a big empty band. */
+      .reveal .scope-grid { margin-top: 1.4rem; }
+      .reveal .scope-grid .slide-card {
+        min-height: 300px; display: flex; flex-direction: column; justify-content: flex-start;
+        padding: 1.6rem 1.4rem;
+      }
+      .reveal .scope-grid .slide-card .card-icon { font-size: 2.5em; line-height: 1; margin-bottom: 0.55rem; font-weight: 700; }
+      .reveal .scope-grid .slide-card.is .card-icon { color: #f1b300; }
+      .reveal .scope-grid .slide-card.isnot .card-icon { color: #595959; }
+      .reveal .scope-grid .slide-card h3 { font-size: 1.25em; margin: 0 0 0.5rem; }
+      .reveal .scope-grid .slide-card p { font-size: 1.0em; }
+      .reveal .deck-stripe {
+        position: fixed; top: 0; bottom: 0; left: 0; width: 8px;
+        background: #f1b300; z-index: 40;
+      }
+      .reveal .deck-footer {
+        position: fixed; left: 0; right: 0; bottom: 0; height: 36px;
+        display: flex; align-items: center; padding: 0 30px 0 28px;
+        font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+        color: #9a9a9a; font-weight: 600; z-index: 40; pointer-events: none;
+        background: linear-gradient(to top, #ffffff 40%, rgba(255, 255, 255, 0));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ═══════ 1 — TITLE ═══════ -->
+        <section class="title-a" data-background-color="#ffffff">
+          <div class="title-a-grid">
+            <div class="title-a-stripe"></div>
+            <div class="title-a-body" style="grid-template-columns:1fr;">
+              <div class="title-a-text">
+                <p class="title-a-kicker">PMRC 2026 &middot; Pre-Conference Workshop 4</p>
+                <h1 class="title-a-h1" style="font-size:2.7em;">Beyond the Hype</h1>
+                <p class="title-a-affil" style="font-size:1.2em; color:#191919;">Using Generative AI in Public Administration Research</p>
+                <p class="title-sponsor"><span>Sponsored by the Institute for Interdisciplinary Data Sciences (IIDS)</span></p>
+                <p class="title-a-affil">June 3, 2026 &middot; American University, Washington, D.C.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════ 2 — SPONSORSHIP ═══════ -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker" style="text-align:center;">Our sponsor</p>
+          <h2 style="text-align:center;">This workshop is sponsored by</h2>
+          <p style="text-align:center; margin:1.1rem 0 0;">
+            <a class="iids-badge" href="https://iids.uidaho.edu/" target="_blank" rel="noopener">Institute for Interdisciplinary Data Sciences (IIDS)</a>
+          </p>
+          <p class="tamper-sub" style="margin-top:0.6rem;">University of Idaho</p>
+          <article class="slide-card" style="max-width:820px; margin:1.6rem auto 0; text-align:center;">
+            <p style="margin:0; font-weight:700; color:#191919;">Did you pay for the pre-conference workshop?</p>
+            <p style="margin:0.4em 0 0; color:#404040;">Email me at <a class="cite" href="mailto:moverton@uidaho.edu">moverton@uidaho.edu</a> so I can follow up.</p>
+          </article>
+        </section>
+
+        <!-- ═══════ 3 — PRESENTERS ═══════ -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Your presenters</p>
+          <h2>Who&rsquo;s leading today</h2>
+          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr); margin-top:1.2rem; align-items:stretch;">
+            <div class="pcol">
+              <img class="pcard-photo" src="img/overton-headshot.jpg" alt="Michael Overton" />
+              <article class="slide-card pcard" style="border-top:4px solid #f1b300;">
+                <p class="pcard-name"><a href="https://www.michaeloverton.net" target="_blank" rel="noopener">Michael Overton</a></p>
+                <p class="pcard-org">University of Idaho</p>
+                <p class="pcard-titles">Associate Professor of Public Administration<br/>Associate Director, Institute for Interdisciplinary Data Sciences</p>
+              </article>
+            </div>
+            <div class="pcol">
+              <img class="pcard-photo" src="img/stokan-headshot.jpg" alt="Eric Stokan" />
+              <article class="slide-card pcard" style="border-top:4px solid #f1b300;">
+                <p class="pcard-name"><a href="https://politicalscience.umbc.edu/faculty-1/dr-eric-stokan/" target="_blank" rel="noopener">Eric Stokan</a></p>
+                <p class="pcard-org">University of Maryland, Baltimore County</p>
+                <p class="pcard-titles">Associate Professor of Political Science &middot; Director, Center for Social Science Scholarship</p>
+              </article>
+            </div>
+            <div class="pcol">
+              <img class="pcard-photo" src="img/larson-headshot.jpg" alt="Sarah Larson" />
+              <article class="slide-card pcard" style="border-top:4px solid #f1b300;">
+                <p class="pcard-name"><a href="https://miamioh.edu/profiles/cas/sarah-larson.html" target="_blank" rel="noopener">Sarah Larson</a></p>
+                <p class="pcard-org">Miami University (Ohio)</p>
+                <p class="pcard-titles">Associate Professor, Political Science &middot; Center for Public Management and Regional Affairs</p>
+              </article>
+            </div>
+          </div>
+          <p class="silver-note" style="text-align:center; margin-top:1.1rem;">
+            With support from <strong>Marwa Elsayed</strong>, PhD student, University of Idaho.
+          </p>
+        </section>
+
+        <!-- ═══════ 4 — SCHEDULE (vertical timeline) ═══════ -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">The plan for today</p>
+          <h2>Workshop agenda</h2>
+          <div class="agenda">
+            <p class="ag-group">Morning &middot; Conceptual Foundations</p>
+            <div class="ag-item">
+              <div class="ag-time">10:00 AM</div><div class="ag-dot"></div>
+              <div>
+                <p class="ag-title">Welcome &amp; Introduction</p>
+                <p class="ag-who">Michael Overton</p>
+              </div>
+            </div>
+            <div class="ag-item">
+              <div class="ag-time">10:20 AM</div><div class="ag-dot"></div>
+              <div>
+                <p class="ag-title">Foundations of Generative AI</p>
+                <p class="ag-who">Eric Stokan &amp; Sarah Larson</p>
+                <p class="ag-desc">The AI landscape and key terms, with ethics and environmental considerations.</p>
+              </div>
+            </div>
+            <div class="ag-item">
+              <div class="ag-time">12:00 PM</div><div class="ag-dot muted"></div>
+              <div>
+                <p class="ag-title">Lunch</p>
+              </div>
+            </div>
+            <p class="ag-group">Afternoon &middot; Framework &amp; Applied Practice</p>
+            <div class="ag-item">
+              <div class="ag-time">1:00 PM</div><div class="ag-dot"></div>
+              <div>
+                <p class="ag-title">The TaMPER Framework</p>
+                <p class="ag-who">Michael Overton</p>
+              </div>
+            </div>
+            <div class="ag-item">
+              <div class="ag-time">2:20 PM</div><div class="ag-dot"></div>
+              <div>
+                <p class="ag-title">Hands-On Coding Lab</p>
+                <p class="ag-who">Eric Stokan, Sarah Larson &amp; Michael Overton</p>
+                <p class="ag-desc">Coding primer, then three use cases (image, text extraction, and text annotation).</p>
+              </div>
+            </div>
+            <div class="ag-item">
+              <div class="ag-time">5:50 PM</div><div class="ag-dot"></div>
+              <div>
+                <p class="ag-title">Synthesis &amp; Wrap-Up</p>
+                <p class="ag-who">Michael Overton</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════ 5 — WHAT IT IS ═══════ -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Scope</p>
+          <h2>What this workshop is</h2>
+          <div class="pillar-grid scope-grid" style="grid-template-columns:repeat(3,1fr);">
+            <article class="slide-card is" style="border-top:4px solid #f1b300;">
+              <div class="card-icon">&#10003;</div>
+              <h3>Build a foundation</h3>
+              <p>Build a basic, working understanding of generative AI.</p>
+            </article>
+            <article class="slide-card is" style="border-top:4px solid #f1b300;">
+              <div class="card-icon">&#10003;</div>
+              <h3>Connect it to research</h3>
+              <p>Understand how generative AI can be used in research.</p>
+            </article>
+            <article class="slide-card is" style="border-top:4px solid #f1b300;">
+              <div class="card-icon">&#10003;</div>
+              <h3>Practice</h3>
+              <p>Work through real examples together.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ═══════ 6 — WHAT IT IS NOT ═══════ -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Scope</p>
+          <h2>What this workshop is not</h2>
+          <div class="pillar-grid scope-grid" style="grid-template-columns:repeat(3,1fr);">
+            <article class="slide-card isnot" style="border-top:4px solid #595959;">
+              <div class="card-icon">&#10007;</div>
+              <h3>Not a writing course</h3>
+              <p>Not a place to learn how to write research papers with generative AI.</p>
+            </article>
+            <article class="slide-card isnot" style="border-top:4px solid #595959;">
+              <div class="card-icon">&#10007;</div>
+              <h3>Not a sales pitch</h3>
+              <p>Not a pitch for AI or any AI software.</p>
+            </article>
+            <article class="slide-card isnot" style="border-top:4px solid #595959;">
+              <div class="card-icon">&#10007;</div>
+              <h3>Not an open debate</h3>
+              <p>Not a forum for extended debate on the practical, political, and ethical concerns of generative AI, beyond our dedicated ethics conversation.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ═══════ 7 — GROUP ACTIVITY ═══════ -->
+        <section class="tdivider fill-center" data-letter="?" data-background-color="#ffffff">
+          <p class="tdivider-kick">Before we begin</p>
+          <h2>A quick reflection</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub" style="font-size:1.3em; max-width:1100px; margin-left:auto; margin-right:auto;">
+            Take 2&ndash;5 minutes and write down what you want to get out of this workshop.
+          </p>
+        </section>
+
+        <!-- ═══════ 8 — DISCUSSION ═══════ -->
+        <section class="fill-center" data-background-color="#ffffff">
+          <p class="slide-kicker" style="text-align:center;">Over to you</p>
+          <h2 style="text-align:center; font-size:2.7em; max-width:1250px; margin:0 auto; line-height:1.2;">
+            What do you want out of this workshop?
+          </h2>
+          <hr class="gold-rule"/>
+        </section>
+
+      </div>
+      <div class="deck-stripe" aria-hidden="true"></div>
+      <div class="deck-footer" aria-hidden="true">Beyond the Hype &middot; PMRC 2026 Pre-Conference Workshop 4</div>
+    </div>
+
+    <script src="reveal/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        center: false,
+        slideNumber: true,
+        transition: "slide",
+        width: 1600,
+        height: 900,
+        margin: 0.06,
+        minScale: 0.2,
+        maxScale: 2.0
+      });
+    </script>
+  </body>
+</html>

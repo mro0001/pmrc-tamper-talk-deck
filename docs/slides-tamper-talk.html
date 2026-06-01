@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f1b300" />
+    <title>TaMPERing Generative AI, a Framework for Systematic and Responsible LLM Use</title>
+    <meta name="description" content="TaMPER, a framework for the systematic and responsible use of large language models. Dr. Michael Overton, University of Idaho." />
+    <link rel="stylesheet" href="reveal/dist/reveal.css" />
+    <link rel="stylesheet" href="reveal/dist/theme/white.css" />
+    <link rel="stylesheet" href="slides.css?v=2" />
+    <link rel="stylesheet" href="tamper.css?v=2" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- ═══════ §0 — TITLE ═══════ -->
+
+        <!-- 1. TITLE -->
+        <section class="title-a" data-background-color="#ffffff">
+          <div class="title-a-grid">
+            <div class="title-a-stripe"></div>
+            <div class="title-a-body">
+              <div class="title-a-text">
+                <p class="title-a-kicker">Beyond the Hype: Using Generative AI in Public Administration Research</p>
+                <h1 class="title-a-h1">TaMPERing Generative AI</h1>
+                <p class="title-a-affil" style="font-size:1.05em; color:#191919;">A framework for the systematic and responsible use of Large Language Models</p>
+                <p class="title-a-speaker">Dr. Michael Overton</p>
+                <p class="title-a-affil">
+                  Associate Professor of Public Administration<br/>
+                  Associate Director, Institute for Interdisciplinary Data Science<br/>
+                  University of Idaho
+                </p>
+              </div>
+              <img class="title-a-headshot" src="img/overton-headshot.jpg" alt="Dr. Michael Overton" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 2c. Motivation (PLACEHOLDER hook per MO) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Why this matters</p>
+          <h2>Researchers are adopting generative AI faster than they are validating it</h2>
+          <div class="headline-stat">
+            <p class="hs-title">AI tool use among researchers</p>
+            <p class="big-num">57% in 2024 <span class="arrow-up">&rarr;</span> 84% in 2025</p>
+            <p class="hs-cite"><a class="cite" href="https://www.wiley.com/en-us/about-us/ai-resources/ai-study/" target="_blank" rel="noopener">(Wiley 2025)</a></p>
+          </div>
+          <p class="closing-line">Scholars have limited guidance on how to use it rigorously.</p>
+        </section>
+
+        <!-- Objection -> survivorship bias (auto-animate: quote slides up, image rises beneath it) -->
+        <!-- State 1: the quote, centered -->
+        <section data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker" data-id="obj-kicker">A fair objection</p>
+          <p class="closing-line" data-id="obj-quote" style="font-size:1.35em; margin:0 auto; line-height:1.45;">You might be saying to yourself,<br>&ldquo;That number seems ridiculously high.<br>I can also spot AI, and I don&rsquo;t see it THAT often!&rdquo;</p>
+        </section>
+        <!-- State 2: the quote shrinks and moves up, the survivorship-bias image rises beneath it -->
+        <section data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker" data-id="obj-kicker">A fair objection</p>
+          <p class="closing-line" data-id="obj-quote" style="font-size:0.95em; margin:0 auto; line-height:1.45;">You might be saying to yourself,<br>&ldquo;That number seems ridiculously high.<br>I can also spot AI, and I don&rsquo;t see it THAT often!&rdquo;</p>
+          <img src="img/survivorship-bias.png" style="display:block; margin:0.7rem auto 0; max-height:58vh; max-width:88%;" alt="Survivorship bias diagram, red dots marking damage on planes that returned"/>
+        </section>
+
+        <!-- Why a framework: from gut feel to defensible (the motivation, before the acronym) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Why a framework</p>
+          <h2>From gut feel to defensible</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Without the framework</h3><p>Pick a model that felt good, prompt until the output looked right, report almost none of it.</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>With <a href="https://arxiv.org/abs/2504.01037" target="_blank" rel="noopener" style="color:inherit; text-decoration:none; border-bottom:2px solid #f1b300;">TaMPER</a></h3><p>Choose the task, agents, model, and prompt deliberately, evaluate purposefully, and report all transparently.</p></article>
+          </div>
+        </section>
+
+        <!-- ═══════ §1 — THE TaMPER FRAMEWORK ═══════ -->
+
+        <!-- 2a. TaMPER acronym (auto-animate step 1: hero alone) -->
+        <section data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker" style="justify-content:center; text-align:center;">The framework</p>
+          <p class="tamper-hero" data-id="thero">T<span class="lc-a">a</span>MPER</p>
+        </section>
+
+        <!-- 2b. TaMPER acronym (auto-animate step 2: hero morphs up, expansion appears) -->
+        <section data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker" style="justify-content:center; text-align:center;">The framework</p>
+          <p class="tamper-hero" data-id="thero" style="font-size:2.9em;">T<span class="lc-a">a</span>MPER</p>
+          <div class="tamper-stack">
+            <p class="tw on"><span class="ti">T</span>ask</p>
+            <p class="tw on"><span class="ti">a</span>gents</p>
+            <p class="tw on"><span class="ti">M</span>odel</p>
+            <p class="tw on"><span class="ti">P</span>rompt</p>
+            <p class="tw on"><span class="ti">E</span>valuation</p>
+            <p class="tw on"><span class="ti">R</span>eporting</p>
+          </div>
+          <p class="tamper-sub">Six decision points for using generative AI with rigor.</p>
+        </section>
+
+        <!-- ═══════ §2 — TASK ═══════ -->
+
+        <!-- Task divider -->
+        <section class="tdivider" data-letter="T" data-background-color="#ffffff">
+          <p class="tdivider-kick">T &middot; Decision one</p>
+          <h2>Task</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">What are you asking the LLM to do?</p>
+        </section>
+
+        <!-- What is a task (deepened: decision + consequence) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Task</p>
+          <h2>What is a &ldquo;task&rdquo;?</h2>
+          <p class="silver-note" style="max-width:1100px; text-align:center; font-size:1em; margin:0 auto;">A task is the set of actions that transform input data into the desired output. Defining one means making three decisions.</p>
+          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr); margin-top:0.5rem;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Input and output</h3><ul><li>Consider your corpus of inputs (i.e., documents, tweets, public comments).</li><li>Decide whether the output form is fixed in advance or discovered by the model.</li><li>Predefined vs Undefined outputs.</li></ul></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Complexity</h3><ul><li>Decide whether to run the task in one pass or decompose it.</li><li>Intricate, multilayered requests turn brittle.</li><li>Simpler sequential steps are more reliable and reproducible.</li></ul></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>The model's function</h3><ul><li>Decide whether the model simulates a participant or acts as an analytical tool.</li><li>Simulating human = Synthetic data.</li><li>Analytical tool = Text Analysis.</li></ul></article>
+          </div>
+          <table class="ttable" style="margin-top:0.7rem;">
+            <thead><tr><th>LLM as a human</th><th>Predefined example</th><th>Undefined example</th><th>Type of task</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Participant</strong></td><td>Survey respondent</td><td>Open-ended interviewee</td><td>Synthetic Data Generation</td></tr>
+              <tr><td><strong>Coder</strong></td><td>Annotate text</td><td>Category creation</td><td>Text Analysis</td></tr>
+              <tr><td><strong>Human extractor</strong></td><td>Identify and extract text</td><td>Summarize document</td><td>Text Analysis</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Social science tasks (interactive Input -> LLM -> Output widget, ported from the eval deck) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Task &middot; In social science</p>
+          <h2>What scholars are doing with LLMs</h2>
+          <p class="silver-note" style="text-align:center; max-width:980px; margin:0 auto 0.5rem;">Click a use case to see the task, a sample input, and the output.</p>
+          <div id="uc-widget">
+            <div class="uc-tabs">
+              <button class="uc-tab active" data-uc="classify"><h4>Classification at scale</h4><p>Sentiment, stance, frames, codes</p></button>
+              <button class="uc-tab" data-uc="extract"><h4>Extraction from records</h4><p>Structured data from filings, reports</p></button>
+              <button class="uc-tab" data-uc="qual"><h4>Qualitative coding</h4><p>Interview transcripts, open comments</p></button>
+              <button class="uc-tab" data-uc="synth"><h4>Synthetic data</h4><p>Test items, calibration sets, scenarios</p></button>
+            </div>
+            <div class="uc-task"><span class="uc-task-label">Task</span><span class="uc-task-content" id="uc-task"></span></div>
+            <div class="uc-flow">
+              <div class="uc-box input"><p class="uc-label">Input</p><p class="uc-content" id="uc-input"></p></div>
+              <div class="uc-llm"><p class="uc-llm-label">LLM</p><p class="uc-llm-icon">&#129504;</p><p class="uc-llm-sub">prompt &middot; model &middot; iteration</p></div>
+              <div class="uc-box output"><p class="uc-label">Output</p><p class="uc-content" id="uc-output"></p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════ §2a — AGENTS ═══════ -->
+
+        <!-- Agents divider -->
+        <section class="tdivider" data-letter="a" data-background-color="#ffffff">
+          <p class="tdivider-kick">a &middot; the silent letter</p>
+          <h2>Agents</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">There is a silent <em>a</em> in TaMPER. Today it stands for Agents.</p>
+        </section>
+
+        <!-- Agents and harnesses: define the agent before the wiring -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Agents</p>
+          <h2>What is an agent?</h2>
+          <p style="font-size:2.1em; font-weight:700; text-align:center; margin:0.5rem auto 1.1rem;">Agent = Model + <span style="color:#b8860b;">Harness</span></p>
+          <div style="max-width:1000px; margin:0 auto; text-align:left;">
+            <p class="silver-note" style="margin:0 0 0.7rem;"><strong>Harness.</strong> The software wrapped around the model that supplies its context, runs the tools it asks for, remembers across turns, and loops until the task is done.</p>
+            <p class="silver-note" style="margin:0;">Anthropic calls the base unit the &ldquo;augmented LLM,&rdquo; a model plus retrieval, tools, and memory. <a class="cite" href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">(Anthropic 2024)</a></p>
+          </div>
+        </section>
+
+        <!-- Agents are LLMs wired up (interactive wiring + tool chips) -->
+        <section id="agent-wiring" data-background-color="#ffffff">
+          <p class="slide-kicker">Agents</p>
+          <h2>Agents are LLMs, just wired up</h2>
+          <p class="pc-hint">Pick a wiring shape, then click a tool to give the model a way to act. Every node is an LLM.</p>
+          <div class="aw-controls">
+            <button class="pc-btn aw-shape" data-shape="sequential">Sequential</button>
+            <button class="pc-btn aw-shape" data-shape="parallel">Parallel</button>
+            <button class="pc-btn aw-shape" data-shape="dynamic">Dynamic</button>
+            <button class="pc-btn aw-shape" data-shape="looped">Looped</button>
+          </div>
+          <p class="aw-caption">An agent is one or more LLM calls, linked together and given tools.</p>
+          <div class="aw-stage">
+            <svg viewBox="0 0 760 300" width="760" height="300" preserveAspectRatio="xMidYMid meet" overflow="visible" class="agent-svg aw-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LLM nodes wired in different shapes, with web search, database, and code-execution tools">
+              <defs>
+                <marker id="awah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#191919"/></marker>
+                <marker id="awahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#f1b300"/></marker>
+              </defs>
+              <!-- wiring layer, redrawn by JS -->
+              <g class="aw-wiring"></g>
+              <!-- tool chips (fixed positions across the bottom) -->
+              <g class="aw-tool" data-tool="web">
+                <rect x="70" y="236" width="180" height="48" rx="10" fill="#fff" stroke="#191919" stroke-width="2"/>
+                <text x="160" y="265" text-anchor="middle" class="aw-tt">Web search</text>
+              </g>
+              <g class="aw-tool" data-tool="db">
+                <rect x="290" y="236" width="180" height="48" rx="10" fill="#fff" stroke="#191919" stroke-width="2"/>
+                <text x="380" y="265" text-anchor="middle" class="aw-tt">Database</text>
+              </g>
+              <g class="aw-tool" data-tool="code">
+                <rect x="510" y="236" width="180" height="48" rx="10" fill="#fff" stroke="#191919" stroke-width="2"/>
+                <text x="600" y="265" text-anchor="middle" class="aw-tt">Code execution</text>
+              </g>
+            </svg>
+            <div class="aw-steps-panel">
+              <p class="aw-steps-title">What happens</p>
+              <ol class="aw-steps"></ol>
+              <p class="aw-toolnote"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agentic workflow vs agentic AI (static): two fixed diagrams -->
+        <section id="agent-concepts" data-background-color="#ffffff">
+          <p class="slide-kicker">Agents</p>
+          <h2>Agentic workflow or agentic AI</h2>
+          <div class="ac-panels">
+            <!-- LEFT: agentic workflow, one fixed path -->
+            <div class="ac-panel">
+              <h3 class="ac-panel-head">Agentic workflow</h3>
+              <p class="ac-def">A fixed pattern of LLM calls. You design the path in code, and every run follows the same steps.</p>
+              <svg viewBox="0 0 460 196" width="460" height="196" preserveAspectRatio="xMidYMid meet" overflow="visible" class="agent-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Input to LLM A to LLM B to LLM C to Output along one fixed path">
+                <defs><marker id="acwf2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#555"/></marker></defs>
+                <text x="46" y="74" text-anchor="middle" class="ac-cap">Input</text>
+                <circle cx="46" cy="96" r="9" fill="#191919"/>
+                <line x1="58" y1="96" x2="98" y2="96" stroke="#555" stroke-width="2.5" marker-end="url(#acwf2)"/>
+                <rect x="100" y="76" width="62" height="40" rx="8" fill="#fff" stroke="#555" stroke-width="2"/>
+                <text x="131" y="101" text-anchor="middle" class="ac-step">LLM A</text>
+                <line x1="162" y1="96" x2="202" y2="96" stroke="#555" stroke-width="2.5" marker-end="url(#acwf2)"/>
+                <rect x="204" y="76" width="62" height="40" rx="8" fill="#fff" stroke="#555" stroke-width="2"/>
+                <text x="235" y="101" text-anchor="middle" class="ac-step">LLM B</text>
+                <line x1="266" y1="96" x2="306" y2="96" stroke="#555" stroke-width="2.5" marker-end="url(#acwf2)"/>
+                <rect x="308" y="76" width="62" height="40" rx="8" fill="#fff" stroke="#555" stroke-width="2"/>
+                <text x="339" y="101" text-anchor="middle" class="ac-step">LLM C</text>
+                <line x1="370" y1="96" x2="408" y2="96" stroke="#555" stroke-width="2.5" marker-end="url(#acwf2)"/>
+                <circle cx="420" cy="96" r="9" fill="#191919"/>
+                <text x="420" y="74" text-anchor="middle" class="ac-cap">Output</text>
+                <rect x="166" y="150" width="128" height="30" rx="15" fill="#f3f3f3" stroke="#9a9a9a" stroke-width="1.5"/>
+                <text x="230" y="170" text-anchor="middle" class="ac-locktext">&#128274; one fixed path</text>
+              </svg>
+            </div>
+            <!-- RIGHT: agentic AI, path decided at runtime -->
+            <div class="ac-panel">
+              <h3 class="ac-panel-head">Agentic AI</h3>
+              <p class="ac-def">The model decides the path at runtime. It picks the next step, calls tools, loops, and stops when it judges the task done.</p>
+              <svg viewBox="0 0 460 196" width="460" height="196" preserveAspectRatio="xMidYMid meet" overflow="visible" class="agent-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Input into an LLM that decides each step, calling tools and looping, then exiting to Output when done">
+                <defs>
+                  <marker id="acai2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#c79a16"/></marker>
+                  <marker id="acai2g" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#f1b300"/></marker>
+                </defs>
+                <text x="34" y="74" text-anchor="middle" class="ac-cap">Input</text>
+                <circle cx="34" cy="96" r="9" fill="#191919"/>
+                <line x1="46" y1="96" x2="114" y2="96" stroke="#c79a16" stroke-width="2.5" marker-end="url(#acai2)"/>
+                <rect x="116" y="68" width="150" height="56" rx="12" fill="#fff8df" stroke="#f1b300" stroke-width="2.5"/>
+                <text x="191" y="92" text-anchor="middle" class="ac-step">LLM decides</text>
+                <text x="191" y="110" text-anchor="middle" class="ac-step">the next step</text>
+                <path d="M150,68 C 150,28 232,28 232,68" fill="none" stroke="#f1b300" stroke-width="2.5" marker-end="url(#acai2g)"/>
+                <text x="191" y="22" text-anchor="middle" class="ac-cap">loops until done</text>
+                <rect x="116" y="150" width="150" height="32" rx="10" fill="#fff" stroke="#555" stroke-width="2"/>
+                <text x="191" y="171" text-anchor="middle" class="ac-step">tools and steps</text>
+                <line x1="174" y1="124" x2="174" y2="150" stroke="#c79a16" stroke-width="2.5" marker-end="url(#acai2)"/>
+                <text x="150" y="142" text-anchor="end" class="ac-cap">calls</text>
+                <line x1="208" y1="150" x2="208" y2="124" stroke="#f1b300" stroke-width="2.5" marker-end="url(#acai2g)"/>
+                <text x="232" y="142" text-anchor="start" class="ac-cap">result</text>
+                <line x1="266" y1="96" x2="404" y2="96" stroke="#c79a16" stroke-width="2.5" marker-end="url(#acai2)"/>
+                <text x="338" y="88" text-anchor="middle" class="ac-cap">when done</text>
+                <circle cx="418" cy="96" r="9" fill="#191919"/>
+                <text x="418" y="74" text-anchor="middle" class="ac-cap">Output</text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- Complexity and Uncertainty: definitions + growth chart + three empirical charts -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Agents</p>
+          <h2>Complexity and Uncertainty</h2>
+          <div style="display:flex; gap:1.2rem; align-items:center; text-align:left;">
+            <div style="flex:0 0 38%; display:flex; flex-direction:column; gap:0.7rem;">
+              <article class="slide-card" style="border-top:4px solid #f1b300;">
+                <h3>Complexity</h3>
+                <p>How complicated the task is. Many steps and deviations from routine, but with clear rules and a checkable answer.</p>
+              </article>
+              <article class="slide-card" style="border-top:4px solid #595959;">
+                <h3>Uncertainty</h3>
+                <p>How analyzable the task is. The right answer turns on judgment, context, or values, and cannot be cheaply verified.</p>
+              </article>
+            </div>
+            <div style="flex:1; display:flex; justify-content:center;">
+              <svg viewBox="0 0 480 320" width="360" height="240" preserveAspectRatio="xMidYMid meet" overflow="visible" class="agent-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capability over time, complexity rising fast, uncertainty rising slowly">
+              <defs><marker id="cax" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#191919"/></marker></defs>
+              <line x1="56" y1="275" x2="462" y2="275" stroke="#191919" stroke-width="2" marker-end="url(#cax)"/>
+              <line x1="56" y1="275" x2="56" y2="32" stroke="#191919" stroke-width="2" marker-end="url(#cax)"/>
+              <text x="58" y="292" text-anchor="start" class="as-axis">2019</text>
+              <text x="450" y="292" text-anchor="end" class="as-axis">2025</text>
+              <text x="258" y="310" text-anchor="middle" class="as-axis">Time</text>
+              <text x="22" y="155" text-anchor="middle" class="as-axis" transform="rotate(-90 22 155)">Capability</text>
+              <path d="M56,270 C 250,260 365,240 452,206" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="2 4"/>
+              <text x="449" y="224" text-anchor="end" class="as-t" fill="#5a5a5a">Judgment, uncertainty</text>
+              <path d="M56,270 C 255,266 368,214 452,50" fill="none" stroke="#f1b300" stroke-width="3.5"/>
+              <text x="449" y="44" text-anchor="end" class="as-t" fill="#a9810a">Complexity</text>
+              <line x1="430" y1="64" x2="430" y2="198" stroke="#bbbbbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="424" y="135" text-anchor="middle" class="as-t" fill="#777" transform="rotate(-90 424 135)">the gap widens</text>
+              </svg>
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem; justify-content:center; align-items:flex-start; margin-top:0.7rem;">
+            <img src="img/cx-chart1.png" style="height:34vh; width:auto;" alt="Accuracy over five iterations vs number of variables, qwen2.5 72b"/>
+            <img src="img/cx-chart2.png" style="height:34vh; width:auto;" alt="Accuracy over five iterations vs number of variables, qwen3 32b thinking"/>
+            <img src="img/cx-chart3.png" style="height:34vh; width:auto;" alt="Accuracy over five iterations vs number of variables, gpt-oss 120b thinking"/>
+          </div>
+        </section>
+
+        <!-- ═══════ §3 — MODEL ═══════ -->
+
+        <!-- Model divider -->
+        <section class="tdivider" data-letter="M" data-background-color="#ffffff">
+          <p class="tdivider-kick">M &middot; Decision two</p>
+          <h2>Model</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">Which LLM should you actually use?</p>
+        </section>
+
+        <!-- Model decisions (interactive: click a decision -> two defined terms + recommendation) -->
+        <section id="model-decisions" data-background-color="#ffffff">
+          <p class="slide-kicker">Model &middot; Three decisions</p>
+          <h2>Three decisions, click to explore</h2>
+          <p class="pc-hint">Click a decision. The two boxes define each option; the recommendation follows below.</p>
+          <div class="md-controls">
+            <button class="pc-btn md-btn" data-comp="opensource">Open-source vs closed-source</button>
+            <button class="pc-btn md-btn" data-comp="access">Access: chat vs API</button>
+            <button class="pc-btn md-btn" data-comp="params">Parameters &amp; hyperparameters</button>
+          </div>
+          <div class="md-terms">
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3 id="md-term-a">&nbsp;</h3><ul id="md-def-a"><li>Click a decision above.</li></ul></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3 id="md-term-b">&nbsp;</h3><ul id="md-def-b"></ul></article>
+          </div>
+          <div class="pc-rec md-rec">
+            <p class="pc-rec-label">Recommendation</p>
+            <ul id="md-rec" class="md-rec-list"><li>Pick a decision to see the recommendation.</li></ul>
+          </div>
+        </section>
+
+        <!-- ═══════ §5 — PROMPT ═══════ -->
+
+        <!-- 26. Prompt divider -->
+        <section class="tdivider" data-letter="P" data-background-color="#ffffff">
+          <p class="tdivider-kick">P &middot; Decision three</p>
+          <h2>Prompt</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">How do you tell the model what you want?</p>
+        </section>
+
+        <!-- Tell it what you want (auto-animates into Components: the prompt stays, bullets become buttons) -->
+        <section data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker">Prompt</p>
+          <h2>Tell it what you want</h2>
+          <div class="pc-grid">
+            <div class="pc-left">
+              <ul style="margin:0; padding-left:1.1rem; text-align:left; font-size:0.9em; line-height:1.5;">
+                <li style="margin-bottom:0.7rem;">Prompts are how you interact with LLMs.</li>
+                <li style="margin-bottom:0.7rem;">Outputs are <strong>highly sensitive</strong> to the prompt.</li>
+                <li style="margin-bottom:0.7rem;">Is it art or is it science? A bit of both.</li>
+                <li>Think in components or sections.</li>
+              </ul>
+            </div>
+            <pre class="pc-template" data-id="prompt-template"><code><span class="pc-sec" data-comp="task">TASK OVERVIEW: Determine whether the news article suggests that {FIRM} engaged in organizational misconduct.</span><span class="pc-sec" data-comp="context">NEWS ARTICLE: {NEWS_ARTICLE}
+
+DEFINITIONS:
+Organizational Misconduct: "an illegal, unethical, or socially irresponsible behavior performed by an organization that directly harms its stakeholders through fraud, product safety issues, employee mistreatment, and environmental violations."</span><span class="pc-sec" data-comp="question">QUESTION: Did {FIRM} engage in organizational misconduct in the news article? Briefly explain your decision. Respond using only one of the following options:
+a) yes
+b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before responding, carefully review the TASK OVERVIEW, NEWS ARTICLE, DEFINITIONS, QUESTION, INSTRUCTIONS, and OUTPUT FORMAT. Respond in valid JSON using the key-value pair {"misconduct": &lt;"yes"|"no"&gt;, "rationale": "&lt;one or two sentences&gt;"}. Before finalizing, review the DEFINITIONS so the rationale does not deviate from them, and review the NEWS ARTICLE so your decision and rationale do not deviate from it.</span><span class="pc-sec" data-comp="output">OUTPUT FORMAT:
+{"misconduct": &lt;"yes"|"no"&gt;, "rationale": "&lt;one or two sentences&gt;"}</span></code></pre>
+          </div>
+        </section>
+
+        <!-- 28. Prompt components (interactive: click a component to highlight it) -->
+        <section id="prompt-components" data-auto-animate data-background-color="#ffffff">
+          <p class="slide-kicker">Prompt &middot; Components</p>
+          <h2>Components, and order matters</h2>
+          <p class="pc-hint">Click a component to highlight it in the prompt and see its recommendation.</p>
+          <div class="pc-grid">
+            <div class="pc-left">
+              <button class="pc-btn" data-comp="task">Task</button>
+              <button class="pc-btn" data-comp="context">Context</button>
+              <button class="pc-btn" data-comp="question">Question</button>
+              <button class="pc-btn" data-comp="instructions">Instructions</button>
+              <button class="pc-btn" data-comp="output">Output</button>
+            </div>
+            <pre class="pc-template" data-id="prompt-template"><code><span class="pc-sec" data-comp="task">TASK OVERVIEW: Determine whether the news article suggests that {FIRM} engaged in organizational misconduct.</span><span class="pc-sec" data-comp="context">NEWS ARTICLE: {NEWS_ARTICLE}
+
+DEFINITIONS:
+Organizational Misconduct: "an illegal, unethical, or socially irresponsible behavior performed by an organization that directly harms its stakeholders through fraud, product safety issues, employee mistreatment, and environmental violations."</span><span class="pc-sec" data-comp="question">QUESTION: Did {FIRM} engage in organizational misconduct in the news article? Briefly explain your decision. Respond using only one of the following options:
+a) yes
+b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before responding, carefully review the TASK OVERVIEW, NEWS ARTICLE, DEFINITIONS, QUESTION, INSTRUCTIONS, and OUTPUT FORMAT. Respond in valid JSON using the key-value pair {"misconduct": &lt;"yes"|"no"&gt;, "rationale": "&lt;one or two sentences&gt;"}. Before finalizing, review the DEFINITIONS so the rationale does not deviate from them, and review the NEWS ARTICLE so your decision and rationale do not deviate from it.</span><span class="pc-sec" data-comp="output">OUTPUT FORMAT:
+{"misconduct": &lt;"yes"|"no"&gt;, "rationale": "&lt;one or two sentences&gt;"}</span></code></pre>
+          </div>
+          <div class="pc-rec pc-rec-full">
+            <p class="pc-rec-label">Recommendation</p>
+            <ul class="pc-rec-list" id="pc-rec-body"><li>Click a component above.</li></ul>
+          </div>
+        </section>
+
+        <!-- 29. Developing a prompt (SVG flowchart) -->
+        <section id="prompt-developing" data-background-color="#ffffff">
+          <p class="slide-kicker">Prompt &middot; Developing a prompt</p>
+          <h2>Developing a prompt is a loop</h2>
+          <p class="pc-hint">Click a node in the flowchart to highlight the matching step.</p>
+          <div class="pd-grid">
+            <ul class="pd-steps">
+              <li class="pd-step" data-step="generic">Start with a broad, generic question.</li>
+              <li class="pd-step" data-step="review">Review the output for what you dislike.
+                <ul class="pd-substeps">
+                  <li class="pd-step" data-step="review">Misusing terms? Add definitions.</li>
+                  <li class="pd-step" data-step="review">Strangely formatted? Specify the output, and limit the options.</li>
+                  <li class="pd-step" data-step="review">Guide its thinking with step-by-step instructions.</li>
+                </ul>
+              </li>
+              <li class="pd-step" data-step="change">Change the prompt and repeat.</li>
+            </ul>
+            <div class="pd-chart">
+              <svg viewBox="0 0 470 420" width="470" height="420" preserveAspectRatio="xMidYMid meet" overflow="visible" class="pd-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Prompt development loop flowchart">
+                <defs>
+                  <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L7,3 L0,6 Z" fill="#191919"/>
+                  </marker>
+                  <marker id="ahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L7,3 L0,6 Z" fill="#f1b300"/>
+                  </marker>
+                </defs>
+                <g class="pd-node" data-step="generic">
+                  <rect x="150" y="8" width="170" height="44" rx="9" fill="#fff" stroke="#191919" stroke-width="2"/>
+                  <text x="235" y="35" text-anchor="middle" class="pd-t">Generic question</text>
+                </g>
+                <line x1="235" y1="52" x2="235" y2="84" stroke="#191919" stroke-width="2" marker-end="url(#ah)"/>
+                <g class="pd-node" data-step="review">
+                  <polygon points="235,88 320,126 235,164 150,126" fill="#fff" stroke="#191919" stroke-width="2"/>
+                  <text x="235" y="130" text-anchor="middle" class="pd-t">Review output</text>
+                </g>
+                <line x1="235" y1="164" x2="235" y2="196" stroke="#191919" stroke-width="2" marker-end="url(#ah)"/>
+                <g class="pd-node" data-step="satisfied">
+                  <polygon points="235,200 320,238 235,276 150,238" fill="#fff" stroke="#191919" stroke-width="2"/>
+                  <text x="235" y="242" text-anchor="middle" class="pd-t">Satisfied?</text>
+                </g>
+                <line x1="320" y1="238" x2="360" y2="238" stroke="#191919" stroke-width="2" marker-end="url(#ah)"/>
+                <text x="340" y="230" text-anchor="middle" class="pd-lbl">Yes!</text>
+                <rect x="362" y="216" width="100" height="44" rx="9" fill="#fff8df" stroke="#191919" stroke-width="2"/>
+                <text x="412" y="234" text-anchor="middle" class="pd-t">Stop and</text>
+                <text x="412" y="250" text-anchor="middle" class="pd-t">enjoy your life</text>
+                <line x1="235" y1="276" x2="235" y2="312" stroke="#191919" stroke-width="2" marker-end="url(#ah)"/>
+                <text x="248" y="298" text-anchor="start" class="pd-lbl">No</text>
+                <g class="pd-node" data-step="change">
+                  <polygon points="235,316 320,354 235,392 150,354" fill="#fff" stroke="#191919" stroke-width="2"/>
+                  <text x="235" y="358" text-anchor="middle" class="pd-t">Change prompt</text>
+                </g>
+                <polyline points="150,354 60,354 60,126 146,126" fill="none" stroke="#f1b300" stroke-width="2.5" marker-end="url(#ahg)"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- Prompt iteration before/after (real qwen2.5:72b outputs): fixed v1 baseline + 3 refinements -->
+        <section id="prompt-iterate" data-background-color="#ffffff">
+          <p class="slide-kicker">Prompt &middot; Before and after</p>
+          <h2>Each refinement changes the output</h2>
+          <div class="ba-baseline">
+            <article class="slide-card ba-base-card" style="border-top:4px solid #595959;">
+              <h3>Prompt</h3>
+              <p>Did the firm do anything wrong in this news article?</p>
+            </article>
+            <article class="slide-card ba-base-card" style="border-top:4px solid #595959;">
+              <h3>News article</h3>
+              <p>Northwind delayed telling employees about layoffs so it would not owe the retention bonuses promised to those who stayed.</p>
+            </article>
+            <article class="slide-card ba-base-card" style="border-top:4px solid #595959;">
+              <h3>Output</h3>
+              <p class="ba-quote">&ldquo;Northwind appears to have engaged in a practice that could be considered ethically questionable&hellip;&rdquo;</p>
+              <p class="ba-flag">About 300 words, and it never commits to a yes or no.</p>
+            </article>
+          </div>
+          <p class="pc-hint" style="margin:0.55rem 0 0.45rem;">That baseline is fixed. Click a refinement to see the new prompt, the new output, and what improved.</p>
+          <div class="ba-grid">
+            <div class="ba-choices">
+              <button class="pc-btn ba-btn" data-ba="v2">Add a definition</button>
+              <button class="pc-btn ba-btn" data-ba="v3">Limit the output</button>
+              <button class="pc-btn ba-btn" data-ba="v4">Guide its thinking</button>
+            </div>
+            <article class="slide-card ba-newcard" style="border-top:4px solid #f1b300;">
+              <h3>New prompt</h3>
+              <p id="ba-newprompt"></p>
+            </article>
+            <article class="slide-card ba-newcard" style="border-top:4px solid #f1b300;">
+              <h3>New output</h3>
+              <p class="ba-quote" id="ba-newoutput"></p>
+            </article>
+          </div>
+          <div class="pc-rec ba-analysis">
+            <p class="pc-rec-label">What improved over the original output</p>
+            <p class="pc-rec-body" id="ba-analysis"></p>
+          </div>
+          <p class="silver-note" style="text-align:center; margin-top:0.4rem;">Model qwen2.5:72b via MindRouter.</p>
+        </section>
+
+        <!-- Structured output: define it and show it with the prompt -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Prompt &middot; Structured output</p>
+          <h2>Structured output, a contract for the answer</h2>
+          <p class="silver-note" style="text-align:center; max-width:1080px; margin:0 auto 0.55rem;">Structured output forces the model to return a fixed, machine-readable shape, a JSON schema you define, instead of free prose. The model fills the slots you specify and cannot wander outside them.</p>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #595959;">
+              <h3>You require a schema</h3>
+              <pre class="so-code">{
+  "stance": "Supportive | Neutral |
+            Unsupportive | Not about Amazon",
+  "confidence": 0.0,
+  "explanation": "string"
+}</pre>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>The model must return</h3>
+              <pre class="so-code">{
+  "stance": "Unsupportive",
+  "confidence": 0.86,
+  "explanation": "The author criticizes
+                 the tax subsidy."
+}</pre>
+            </article>
+          </div>
+          <p class="closing-line">Why it matters. Compliance jumps to about 100 percent, every answer parses the same way, and you can separate what the schema imposed from what the model actually decided.</p>
+        </section>
+
+        <!-- Agents bridge: the same prompt components, relabeled in an agentic system -->
+        <section id="agent-relabel" data-background-color="#ffffff">
+          <p class="slide-kicker">Agents &middot; Same parts, new names</p>
+          <h2>In an agent the prompt parts get relabeled</h2>
+          <p class="pc-hint">Nothing new is invented. Three of the five components you just learned move out of one block of text and become standing parts of the system.</p>
+          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr); margin-top:0.5rem;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Context becomes memory</h3>
+              <p>What you pasted in is now what the agent stores and re-retrieves.</p>
+              <p class="silver-note" style="margin-top:0.3rem;">Definitions and data arrive per task from memory, a database, or search instead of being retyped.</p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Instructions become steps</h3>
+              <p>One prose list of steps becomes separate LLM calls.</p>
+              <p class="silver-note" style="margin-top:0.3rem;">Each step is its own call or tool call the harness runs in turn, not a paragraph the model narrates.</p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Output becomes a handoff</h3>
+              <p>The answer is no longer final.<br>It is passed forward.</p>
+              <p class="silver-note" style="margin-top:0.3rem;">Each result feeds the next step, tool, or agent rather than going straight back to you.</p>
+            </article>
+          </div>
+          <p class="closing-line">Same jobs you learned in the Prompt section. In one prompt you typed them in a row, in an agent the system holds each one. <a class="cite" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">(Anthropic 2025)</a></p>
+        </section>
+
+        <!-- ═══════ §6 — EVALUATION (consolidated from the LLM evaluation deck) ═══════ -->
+
+        <!-- Evaluation divider -->
+        <section class="tdivider" data-letter="E" data-background-color="#ffffff">
+          <p class="tdivider-kick">E &middot; Decision four</p>
+          <h2>Evaluation</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">How do you know the output is any good?</p>
+        </section>
+
+        <!-- How do we know the output is good? -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation</p>
+          <h2>How do we know the output is good?</h2>
+          <p class="silver-note" style="text-align:center; max-width:1000px; margin:0 auto 0.5rem;">Treat the LLM as a measurement instrument, not a tool and not a person.</p>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Signal in the data</h3><p>Is the answer right? This is accuracy.</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Health of the instrument</h3><p>Is the model measuring consistently? This is precision.</p></article>
+          </div>
+          <p class="closing-line">validity becomes accuracy, reliability becomes precision, error becomes uncertainty.</p>
+        </section>
+
+        <!-- The evaluation protocol -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Protocol</p>
+          <h2>The evaluation protocol</h2>
+          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr);">
+            <article class="slide-card"><h3>Dual response</h3><p>Every task yields a response and an explanation.</p></article>
+            <article class="slide-card"><h3>LLM as a judge</h3><p>Automate scoring at scale with an ensemble of judges.</p></article>
+            <article class="slide-card"><h3>Sample, Benchmark, Population</h3><p>Hand-code a small sample, set benchmarks, then run the full population and compare back.</p></article>
+          </div>
+          <p class="closing-line">This answers the practical question, how much do I need to hand-code?</p>
+        </section>
+
+        <!-- Two response formats -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Protocol</p>
+          <h2>Two response formats, two evaluation paths</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Direct response</h3><p>Scored on compliance, accuracy, and precision.</p></article>
+            <article class="slide-card" style="border-top:4px solid #191919;"><h3>Explanation</h3><p>Scored on quality, and checked with an ensemble of judges.</p></article>
+          </div>
+          <p class="closing-line">Evaluating the explanation lets you audit reasoning when there is no single fact to check.</p>
+        </section>
+
+        <!-- The minimum floor -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Criteria</p>
+          <h2>The minimum floor</h2>
+          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr);">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Compliance</h3><p>Does the output match the required structure?</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Accuracy</h3><p>How close to a reference value?</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Precision</h3><p>How consistent across repeated runs?</p></article>
+          </div>
+          <p class="closing-line">Logically dependent. Establish each before the next, with quality above the floor.</p>
+        </section>
+
+        <!-- Worked example: Compliance in action -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Compliance in action</p>
+          <h2>Compliance, does the output match the required structure?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>What it measures</h3><p>Schema match. Are the fields, types, and labels the ones that were requested?</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Metrics</h3><ul><li>Percent correct data type</li><li>Percent missing fields</li><li>Schema validation rate</li></ul></article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Compliance (stance detection)</p>
+            <table class="results-table">
+              <thead><tr><th>Model</th><th>Established prompt</th><th>Revised prompt</th></tr></thead>
+              <tbody>
+                <tr><td>Command A</td><td>99.98%</td><td>100.00%</td></tr>
+                <tr><td>GPT OSS</td><td>100.00%</td><td>100.00%</td></tr>
+                <tr><td>Phi 4</td><td>100.00%</td><td>100.00%</td></tr>
+                <tr><td>Qwen 3</td><td>100.00%</td><td>100.00%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Structured outputs delivered about 100 percent compliance in every cell, so the floor is cleared and we move on.</p>
+          </div>
+        </section>
+
+        <!-- Worked example: Accuracy in action (with signal vs noise) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Accuracy in action</p>
+          <h2>Accuracy, how close to a reference value?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>What it measures</h3><p>Closeness to a reference, whether objective ground truth or expert human judgment. This is validity in classical terms.</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Metrics</h3><ul><li>Exact match and F1</li><li>Classification precision and recall</li><li>Correlation with human coding</li><li>Difference tests, McNemar, Kolmogorov-Smirnov, Mann-Whitney U, Wasserstein</li></ul></article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Accuracy with McNemar (stance detection)</p>
+            <table class="results-table">
+              <thead><tr><th>Model</th><th>Established</th><th>Revised</th><th>McNemar &chi;&sup2;</th></tr></thead>
+              <tbody>
+                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td><td>272.0***</td></tr>
+                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td><td class="row-naive">153.0</td></tr>
+                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td><td>379.0***</td></tr>
+                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td><td>280.0**</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">The GPT OSS gap is noise, so the framework sends you to the next criterion. <span style="color:#404040;">* p&lt;.05 &middot; ** p&lt;.01 &middot; *** p&lt;.001</span></p>
+          </div>
+        </section>
+
+        <!-- Worked example: Precision in action -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Precision in action</p>
+          <h2>Precision, how consistent across repeated runs?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>What it measures</h3><p>Output consistency when the same input is run five or more times. This is reliability, not the classification precision above.</p></article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Metrics</h3><ul><li>Agreement rate (categorical)</li><li>Standard deviation (numeric)</li><li>ICC (ordinal)</li><li>Krippendorff's &alpha; (mixed types)</li></ul></article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Precision (stance detection, 5 iterations)</p>
+            <table class="results-table">
+              <thead>
+                <tr><th rowspan="2">Model</th><th colspan="2" class="th-group">Krippendorff's &alpha;</th><th colspan="2" class="th-group">Agreement rate</th></tr>
+                <tr><th class="th-sub">Established</th><th class="th-sub">Revised</th><th class="th-sub">Established</th><th class="th-sub">Revised</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>0.71</td><td class="row-win">0.95</td><td>86.97%</td><td class="row-win">98.01%</td></tr>
+                <tr><td>GPT OSS</td><td>0.89</td><td>0.90</td><td>96.06%</td><td>96.44%</td></tr>
+                <tr><td>Phi 4</td><td>0.72</td><td class="row-win">0.81</td><td>88.03%</td><td class="row-win">91.89%</td></tr>
+                <tr><td>Qwen 3</td><td>0.74</td><td class="row-win">0.83</td><td>89.77%</td><td class="row-win">93.52%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Precision broke the tie for Command A. Same accuracy region, far tighter agreement, alpha 0.71 up to 0.95.</p>
+          </div>
+        </section>
+
+        <!-- PPI worked example (ported from eval deck) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Scaling</p>
+          <h2>Scaling honestly with PPI</h2>
+          <p style="text-align:center; margin:0 0 0.4rem; color:#595959; font-size:0.78em;"><a class="cite" href="https://doi.org/10.1126/science.adi6000" target="_blank" rel="noopener">(Angelopoulos et al. 2023, Science)</a></p>
+          <div class="ppi-grid">
+            <div class="ppi-step">Setup</div>
+            <div class="ppi-desc">Hand-code a calibration set, let the LLM code the full corpus.</div>
+            <div class="ppi-result">Calibration set, 200 hand-coded &middot; Unlabeled corpus, 2,010 LLM-coded</div>
+
+            <div class="ppi-step">Estimator</div>
+            <div class="ppi-desc">ML estimate on everything plus a correction for ML error, estimated on the calibration set.</div>
+            <div class="ppi-result">
+              <table class="ppi-table">
+                <thead><tr><th>Method</th><th>Point estimate</th></tr></thead>
+                <tbody>
+                  <tr class="row-win"><td>PPI++</td><td>2.055</td></tr>
+                  <tr class="row-naive"><td>Naive (200 labels only)</td><td>2.160</td></tr>
+                  <tr class="row-truth"><td>True population mean</td><td>2.053</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ppi-step">Guarantee</div>
+            <div class="ppi-desc">The resulting confidence interval is valid regardless of how good the LLM is.</div>
+            <div class="ppi-result">
+              <table class="ppi-table">
+                <thead><tr><th>Method</th><th>95% CI</th><th>Width</th></tr></thead>
+                <tbody>
+                  <tr class="row-win"><td>PPI++</td><td>[1.954, 2.156]</td><td>0.202</td></tr>
+                  <tr class="row-naive"><td>Naive (200 labels only)</td><td>[1.975, 2.345]</td><td>0.369</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="closing-line" style="font-size:1.15em;">Same 200 labels, 45 percent narrower interval.</p>
+        </section>
+
+        <!-- Quality presupposes the floor (closes the quality-taxonomy gap) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Criteria</p>
+          <h2>Quality sits above the floor</h2>
+          <p class="silver-note" style="text-align:center; max-width:1000px; margin:0 auto 0.5rem;">Compliance, accuracy, and precision are the floor. Quality is the second-order criterion, and it only means something once the floor is cleared.</p>
+          <div class="pillar-grid" style="grid-template-columns:repeat(4,1fr); margin-top:0.5rem;">
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Linguistic</h3><p>Fluency and coherence.</p></article>
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Logic</h3><p>Entailment and plausibility.</p></article>
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Information fidelity</h3><p>Factuality, faithfulness, relevance.</p></article>
+            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Informativeness</h3><p>Information depth and restatement.</p></article>
+          </div>
+          <p class="closing-line">These are the buckets the judges score later. They presuppose a compliant, accurate, precise output.</p>
+        </section>
+
+        <!-- Worked example: judges, mean ratings table (ported from eval deck) -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Worked example</p>
+          <h2>Harsh and lenient judges measure different things</h2>
+          <p class="silver-note" style="text-align:center; max-width:1040px; margin:0 auto 0.4rem;">9 quality questions on a 5-point scale, in 4 buckets. Same judge (GPT OSS 120B), same data (400 sentiment outputs by 4 models). Only the prompt changes, three lines added asking the judge to be extremely harsh but fair.</p>
+          <div class="results-callout" style="padding:0.55rem 0.8rem;">
+            <p class="results-label" style="margin-bottom:0.35rem;">Mean rating across 4 models, Not Harsh to Harsh</p>
+            <table class="results-table judge-table">
+              <thead>
+                <tr>
+                  <th colspan="2" class="th-group" style="background:#fff8df;">Linguistic</th>
+                  <th colspan="2" class="th-group" style="background:#eef4fb;">Logic</th>
+                  <th colspan="3" class="th-group" style="background:#f3f1ea;">Information Fidelity</th>
+                  <th colspan="2" class="th-group" style="background:#f4ebef;">Informativeness</th>
+                </tr>
+                <tr>
+                  <th class="th-sub">Fluency</th><th class="th-sub">Coherence</th>
+                  <th class="th-sub">Entailment</th><th class="th-sub">Plausibility</th>
+                  <th class="th-sub">Factuality</th><th class="th-sub">Faithfulness</th><th class="th-sub">Relevance</th>
+                  <th class="th-sub">Information</th><th class="th-sub">Restatement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="row-naive"><td>4.58</td><td>4.87</td><td>4.94</td><td>4.07</td><td>4.75</td><td>4.45</td><td>5.00</td><td>3.83</td><td>4.36</td></tr>
+                <tr class="row-win"><td>4.36</td><td class="cell-flag">4.21</td><td>4.87</td><td>3.81</td><td>4.60</td><td>4.35</td><td>5.00</td><td>3.73</td><td>4.27</td></tr>
+                <tr class="row-delta"><td>&minus;0.22</td><td class="cell-flag">&minus;0.65</td><td>&minus;0.07</td><td>&minus;0.26</td><td>&minus;0.16</td><td>&minus;0.10</td><td>0.00</td><td>&minus;0.10</td><td>&minus;0.09</td></tr>
+              </tbody>
+            </table>
+            <p class="judge-row-key"><span class="key-naive">&#9632;</span> Not Harsh &nbsp;&middot;&nbsp; <span class="key-win">&#9632;</span> Harsh &nbsp;&middot;&nbsp; <span class="key-delta">&#9632;</span> &Delta;</p>
+          </div>
+        </section>
+
+        <!-- ═══════ §7 — REPORTING ═══════ -->
+
+        <!-- Reporting divider -->
+        <section class="tdivider" data-letter="R" data-background-color="#ffffff">
+          <p class="tdivider-kick">R &middot; Decision five</p>
+          <h2>Reporting</h2>
+          <hr class="gold-rule"/>
+          <p class="tamper-sub">Make the whole thing reproducible.</p>
+        </section>
+
+        <!-- Reporting checklist -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Reporting &middot; Reproducibility</p>
+          <h2>Report it back along the same five steps</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card"><h3>Task</h3><p>Input data, preprocessing such as OCR, tokenized descriptive statistics, desired output.</p></article>
+            <article class="slide-card"><h3>Model</h3><p>Model selected, models tested, hyperparameters, date accessed.</p></article>
+            <article class="slide-card"><h3>Prompt</h3><p>Full prompt template, and the number of calls per item.</p></article>
+            <article class="slide-card"><h3>Evaluation</h3><p>Protocol, criteria, benchmarks, and any bias or privacy notes.</p></article>
+          </div>
+        </section>
+
+        <!-- Reporting checklist (interactive: card -> checklist -> reported example) -->
+        <section id="report-checklist" data-background-color="#ffffff">
+          <p class="slide-kicker">Reporting &middot; The checklist</p>
+          <h2>What to report, point by point</h2>
+          <p class="pc-hint">Click a section, then a line in its checklist, to see a reported example from the Amazon HQ2 stance-detection study.</p>
+          <div class="rc-cards">
+            <button class="pc-btn rc-card" data-rc="task"><span class="rc-card-t">Task</span><span class="rc-card-d">What went in, what the model did, what came out.</span></button>
+            <button class="pc-btn rc-card" data-rc="model"><span class="rc-card-t">Model</span><span class="rc-card-d">A named, dated model and its full configuration.</span></button>
+            <button class="pc-btn rc-card" data-rc="prompt"><span class="rc-card-t">Prompt</span><span class="rc-card-d">The prompt verbatim, the strategy, the calls per task.</span></button>
+            <button class="pc-btn rc-card" data-rc="evaluation"><span class="rc-card-t">Evaluation</span><span class="rc-card-d">Protocol, criteria, comparisons, benchmarks, bias.</span></button>
+          </div>
+          <div class="rc-body">
+            <div class="rc-list-wrap">
+              <p class="rc-col-label">Checklist</p>
+              <ul class="rc-list" id="rc-list"></ul>
+            </div>
+            <div class="rc-ex-wrap">
+              <p class="rc-col-label">Reported example</p>
+              <div class="rc-ex" id="rc-ex">Click a checklist line.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════ §8 — CONCLUSION ═══════ -->
+
+        <!-- Closing: thanks + contact -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Thank you</p>
+          <h2>Thanks for coming</h2>
+          <p style="text-align:center; font-size:1.3em; font-weight:600; margin:0.5rem auto 1.5rem; color:#191919;">Dr. Michael Overton</p>
+          <div style="text-align:center; line-height:2.2; font-size:1.1em; color:#404040;">
+            <p style="margin:0;">Email &nbsp;&middot;&nbsp; <a href="mailto:moverton@uidaho.edu" style="color:#191919; border-bottom:2px solid #f1b300; text-decoration:none;">moverton@uidaho.edu</a></p>
+            <p style="margin:0;">Website &nbsp;&middot;&nbsp; <a href="https://www.michaeloverton.net" target="_blank" rel="noopener" style="color:#191919; border-bottom:2px solid #f1b300; text-decoration:none;">www.michaeloverton.net</a></p>
+            <p style="margin:0;">GitHub &nbsp;&middot;&nbsp; <a href="https://github.com/mro0001" target="_blank" rel="noopener" style="color:#191919; border-bottom:2px solid #f1b300; text-decoration:none;">github.com/mro0001</a></p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <script src="reveal/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: true,
+        transition: "slide",
+        width: 1600,
+        height: 900,
+        margin: 0.06,
+        minScale: 0.2,
+        maxScale: 2.0
+      });
+    </script>
+    <script>
+      /* Interactive Components slide: click a component to highlight its section
+         in the prompt template and populate its recommendation. */
+      (function () {
+        var slide = document.getElementById('prompt-components');
+        if (!slide) return;
+        var RECS = {
+          task: ['Do not use role specification, unless you are building a silicon sample.'],
+          context: ['Include definitions of key terminology.'],
+          question: ['The order of your scale matters.'],
+          instructions: ['Do not use examples, examples condition the output.', 'Ask for an explanation.', 'Specify the output format repeatedly.'],
+          output: ['Specify the output format explicitly.', 'Repeat it in the instructions.']
+        };
+        var btns = slide.querySelectorAll('.pc-btn');
+        var secs = slide.querySelectorAll('.pc-sec');
+        var recBody = slide.querySelector('#pc-rec-body');
+        btns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var comp = b.getAttribute('data-comp');
+            btns.forEach(function (x) { x.classList.toggle('active', x === b); });
+            secs.forEach(function (s) { s.classList.toggle('hl', s.getAttribute('data-comp') === comp); });
+            recBody.innerHTML = (RECS[comp] || []).map(function (r) { return '<li>' + r + '</li>'; }).join('');
+          });
+        });
+        if (btns[0]) btns[0].click();
+      })();
+    </script>
+    <script>
+      /* Model decisions: click a decision to reveal its two terms (each defined
+         as bullets) and the recommendation below. Folds in the former Parameters
+         and Recommendations slides. */
+      (function () {
+        var slide = document.getElementById('model-decisions');
+        if (!slide) return;
+        var DATA = {
+          opensource: {
+            a: ['Open-source', ['Weights are public.', 'You can host it yourself, inspect it, and pin an exact version.', 'Open-weight shares only the final weights, not the training code or data.']],
+            b: ['Closed-source', ['Reached only through a vendor API, like GPT or Claude.', 'Leads on raw performance, but updates without notice and ships your data off-site.']],
+            rec: ['Prefer open-source or open-weight, ideally hosted locally.', 'It is more transparent and reproducible, and it keeps sensitive data in house.', 'The gap on public benchmarks is closing fast.']
+          },
+          access: {
+            a: ['Chat', ['The web chat box.', 'Fine for exploring, but you cannot pin a version, fix the settings, or batch documents.', 'Nothing is logged for replication.']],
+            b: ['API', ['Programmatic calls, OpenAI-compatible or Ollama.', 'You set temperature and top_p, lock the context window and token limits, and request structured output.', 'Every call is logged, so the run is auditable and repeatable.']],
+            rec: ['Use the API for research, not the chat box.', 'It is what makes a run reproducible: fixed settings, structured output, and a full log of every call.', 'Report the model name and the version you called.']
+          },
+          params: {
+            a: ['Parameters', ["The model's learned weights, its size.", 'Reported as a count, for example 8B or 70B.', 'More can help on hard tasks, but not always, so test on your own data.']],
+            b: ['Hyperparameters', ['The knobs you set at run time.', 'Context window, temperature and top_p or top_k, and the output token limit.', 'Set them deliberately and report them, because they drive reproducibility.']],
+            rec: ['Use larger models and max out the context window when available, then confirm the gain on your own data.', 'Temperature and top_p are still an open question, so set them deliberately, report them, and test whether they matter <a class="cite" href="https://arxiv.org/abs/2402.05201" target="_blank" rel="noopener">(Renze and Guven 2024)</a>.']
+          }
+        };
+        var btns = slide.querySelectorAll('.md-btn');
+        var termA = slide.querySelector('#md-term-a'), defA = slide.querySelector('#md-def-a');
+        var termB = slide.querySelector('#md-term-b'), defB = slide.querySelector('#md-def-b');
+        var rec = slide.querySelector('#md-rec');
+        function li(arr) { return arr.map(function (t) { return '<li>' + t + '</li>'; }).join(''); }
+        function show(key) {
+          var d = DATA[key]; if (!d) return;
+          termA.textContent = d.a[0]; defA.innerHTML = li(d.a[1]);
+          termB.textContent = d.b[0]; defB.innerHTML = li(d.b[1]);
+          rec.innerHTML = li(d.rec);
+          btns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-comp') === key); });
+        }
+        btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-comp')); }); });
+        show('opensource');
+      })();
+    </script>
+    <script>
+      /* Use-case switcher (Input -> LLM -> Output), ported from the eval deck. */
+      (function () {
+        var widget = document.getElementById("uc-widget");
+        if (!widget) return;
+        var EXAMPLES = {
+          classify: {
+            task: "Is this tweet toxic? Return true or false with a label.",
+            input: "@hammyp703 @Reuters Fake news try again loser",
+            output: '{ "toxic": true,\n  "label": "personal_attack" }'
+          },
+          extract: {
+            task: "Extract the budget line items from this paragraph. Return a JSON object with numeric values in dollars.",
+            input: "Project total: $245,000.\nPI salary: $80k.\nEquipment: $35,000.\nTravel: $12,000.\nIndirect: $58,000.",
+            output: '{ "total": 245000,\n  "pi_salary": 80000,\n  "equipment": 35000,\n  "travel": 12000,\n  "indirect": 58000 }'
+          },
+          qual: {
+            task: "Code this interview excerpt with up to three thematic codes from the codebook.",
+            input: "\"I felt like the program left me with no real options. They kept saying we will get back to you but no one ever did.\"",
+            output: '[ "bureaucratic_obstacles",\n  "lack_of_responsiveness",\n  "felt_powerless" ]'
+          },
+          synth: {
+            task: "Generate three plausible open-ended responses to a survey question.",
+            input: "\"What is your biggest concern about AI in your job?\"",
+            output: "1. \"I worry about being replaced before I finish my career.\"\n2. \"My expertise feels devalued.\"\n3. \"Mostly I am worried about reliability and oversight.\""
+          }
+        };
+        var taskEl = document.getElementById("uc-task");
+        var inputEl = document.getElementById("uc-input");
+        var outputEl = document.getElementById("uc-output");
+        var tabs = widget.querySelectorAll(".uc-tab");
+        function render(key) {
+          var ex = EXAMPLES[key];
+          if (!ex) return;
+          taskEl.textContent = ex.task;
+          inputEl.textContent = ex.input;
+          outputEl.textContent = ex.output;
+          if (window.Reveal && Reveal.layout) Reveal.layout();
+        }
+        tabs.forEach(function (t) {
+          t.addEventListener("click", function () {
+            tabs.forEach(function (x) { x.classList.remove("active"); });
+            t.classList.add("active");
+            render(t.dataset.uc);
+          });
+        });
+        var active = widget.querySelector(".uc-tab.active");
+        render(active ? active.dataset.uc : "classify");
+      })();
+    </script>
+    <script>
+      /* KDE distribution grids: fetch JSON and render small-multiple density panels.
+         Ported from the eval deck. */
+      (function () {
+        var grids = document.querySelectorAll(".judge-acc-grid");
+        if (!grids.length) return;
+        async function renderGrid(root) {
+          var src = root.dataset.source;
+          if (!src) return;
+          var data;
+          try {
+            var r = await fetch(src);
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            data = await r.json();
+          } catch (e) {
+            root.innerHTML = '<p style="color:#595959">Could not load ' + src + ' (' + e.message + ')</p>';
+            return;
+          }
+          function renderPanel(modelKey, modelLabel) {
+            var cellData = data.data[modelKey];
+            var xGrid = data.x_grid;
+            var xMin = xGrid[0], xMax = xGrid[xGrid.length - 1];
+            var w = 280, h = 150, padL = 30, padR = 8, padT = 10, padB = 32;
+            var innerW = w - padL - padR, innerH = h - padT - padB;
+            var yMax = 0;
+            data.curves.forEach(function (c) { cellData[c.key].y.forEach(function (y) { if (y > yMax) yMax = y; }); });
+            yMax = yMax * 1.08 || 1;
+            function pathFor(yArr) {
+              var d = "";
+              for (var i = 0; i < xGrid.length; i++) {
+                var x = padL + (xGrid[i] - xMin) / (xMax - xMin) * innerW;
+                var y = padT + (1 - yArr[i] / yMax) * innerH;
+                d += (i === 0 ? "M" : "L") + x.toFixed(1) + "," + y.toFixed(1) + " ";
+              }
+              var xEnd = padL + innerW, yBase = padT + innerH;
+              d += "L" + xEnd.toFixed(1) + "," + yBase.toFixed(1) + " L" + padL.toFixed(1) + "," + yBase.toFixed(1) + " Z";
+              return d;
+            }
+            var svg = '<svg class="judge-acc-svg" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="xMidYMid meet">';
+            svg += '<line x1="' + padL + '" y1="' + (padT + innerH) + '" x2="' + (padL + innerW) + '" y2="' + (padT + innerH) + '" stroke="#191919" stroke-width="1"/>';
+            svg += '<line x1="' + padL + '" y1="' + padT + '" x2="' + padL + '" y2="' + (padT + innerH) + '" stroke="#191919" stroke-width="1"/>';
+            var tickStep = (xMax - xMin) > 2 ? 1 : 0.2;
+            var tickStart = Math.ceil(xMin / tickStep) * tickStep;
+            var tickFmt = tickStep < 1 ? function (v) { return v.toFixed(1); } : function (v) { return String(Math.round(v)); };
+            for (var t = tickStart; t <= xMax + 1e-9; t += tickStep) {
+              var xt = padL + (t - xMin) / (xMax - xMin) * innerW;
+              svg += '<line x1="' + xt + '" y1="' + (padT + innerH) + '" x2="' + xt + '" y2="' + (padT + innerH + 3) + '" stroke="#191919" stroke-width="1"/>';
+              svg += '<text x="' + xt + '" y="' + (padT + innerH + 13) + '" text-anchor="middle" font-size="9" fill="#808080">' + tickFmt(t) + '</text>';
+            }
+            data.curves.forEach(function (c) {
+              svg += '<path d="' + pathFor(cellData[c.key].y) + '" fill="' + c.color + '" fill-opacity="0.4" stroke="' + c.color + '" stroke-width="1.3"/>';
+            });
+            data.curves.forEach(function (c) {
+              var m = cellData[c.key].mean;
+              var x = padL + (m - xMin) / (xMax - xMin) * innerW;
+              svg += '<line x1="' + x + '" y1="' + (padT + innerH) + '" x2="' + x + '" y2="' + (padT + innerH + 6) + '" stroke="' + c.color + '" stroke-width="2.5"/>';
+            });
+            svg += '<text x="' + (padL + innerW / 2) + '" y="' + (h - 4) + '" text-anchor="middle" font-size="9" fill="#808080">' + (data.x_label || "mean judge score") + '</text>';
+            svg += '</svg>';
+            var stats = data.curves.map(function (c) {
+              return '<span style="color:' + c.color + ';">' + c.label + '</span> &mu;=' + cellData[c.key].mean.toFixed(2) + ' (n=' + cellData[c.key].n + ')';
+            }).join('<br/>');
+            return '<div class="judge-acc-panel"><p class="judge-acc-panel-title">' + modelLabel + '</p>' + svg + '<p class="judge-acc-panel-stats">' + stats + '</p></div>';
+          }
+          var panelsHtml = data.models.map(function (m) { return renderPanel(m.key, m.label); }).join('');
+          var legendHtml = '<div class="judge-acc-legend">' + data.curves.map(function (c) {
+            return '<span class="judge-acc-legend-item"><span class="judge-acc-legend-swatch" style="background:' + c.color + ';"></span>' + c.label + '</span>';
+          }).join('') + '</div>';
+          root.innerHTML = panelsHtml + legendHtml;
+        }
+        grids.forEach(function (g) { renderGrid(g); });
+      })();
+    </script>
+    <script>
+      /* Developing-a-prompt loop slide: click an SVG flowchart node to
+         highlight the matching step(s) in the left-hand list. */
+      (function () {
+        var slide = document.getElementById('prompt-developing');
+        if (!slide) return;
+        var nodes = slide.querySelectorAll('.pd-node[data-step]');
+        var steps = slide.querySelectorAll('.pd-step');
+        function highlight(step) {
+          nodes.forEach(function (n) { n.classList.toggle('active', n.getAttribute('data-step') === step); });
+          steps.forEach(function (s) { s.classList.toggle('hl', s.getAttribute('data-step') === step); });
+        }
+        nodes.forEach(function (n) {
+          var step = n.getAttribute('data-step');
+          n.addEventListener('click', function () {
+            // "satisfied" has no mapped step, so clicking it clears highlights.
+            var hasStep = slide.querySelector('.pd-step[data-step="' + step + '"]');
+            highlight(hasStep ? step : null);
+          });
+        });
+        // Pre-highlight the generic step so a static PDF export is not ambiguous.
+        highlight('generic');
+      })();
+    </script>
+    <script>
+      /* Prompt iteration before/after, real qwen2.5:72b outputs via MindRouter.
+         v1 is the fixed baseline shown up top. v2-v4 are the refinement choices,
+         each populating the new-prompt, new-output, and analysis cards. */
+      (function () {
+        var slide = document.getElementById('prompt-iterate');
+        if (!slide) return;
+        var BA = {
+          v2: {
+            prompt: 'Adds the definition. “Organizational misconduct, an illegal, unethical, or socially irresponsible behavior performed by an organization that directly harms its stakeholders through fraud, product safety issues, employee mistreatment, and environmental violations.”',
+            output: '“Northwind appears to have engaged in organizational misconduct… unethical and socially irresponsible… While this behavior does not appear to be illegal…”',
+            analysis: 'Scoped to the definition now, so the answer stays on topic. Still a full hedged paragraph though, not a decision.'
+          },
+          v3: {
+            prompt: 'Adds an output constraint. “Respond using only one of the following options, a) yes or b) no. Return JSON, misconduct yes or no and a one or two sentence rationale.”',
+            output: '“Yes. Delaying layoff notices to avoid retention bonuses is unethical behavior that harms stakeholders, fitting the definition of organizational misconduct.”',
+            analysis: 'A single label plus a short rationale. Now comparable across runs and across models, where the original 300-word essay was not.'
+          },
+          v4: {
+            prompt: 'Adds step-by-step instructions. “Before responding, carefully review the article, the definition, and the question. Provide an explanation, then the decision. Before finalizing, recheck the definition and the article so neither the decision nor the rationale deviates from them.”',
+            output: '“1. Action, delayed layoff notices to avoid bonuses. 2. Category, employee mistreatment. 3. Decide… Final Answer, Yes.”',
+            analysis: 'Reasons come first and the category is named, so the final yes is auditable against the steps rather than asserted.'
+          }
+        };
+        var btns = slide.querySelectorAll('.ba-btn');
+        var np = slide.querySelector('#ba-newprompt');
+        var no = slide.querySelector('#ba-newoutput');
+        var an = slide.querySelector('#ba-analysis');
+        function show(k) {
+          var d = BA[k]; if (!d) return;
+          np.textContent = d.prompt;
+          no.textContent = d.output;
+          an.textContent = d.analysis;
+          btns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-ba') === k); });
+          if (window.Reveal && Reveal.layout) Reveal.layout();
+        }
+        btns.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-ba')); }); });
+        show('v2');
+      })();
+    </script>
+    <script>
+      /* Agents are LLMs wired up: every node is an LLM. Pick a wiring shape
+         (redraws the connectors and a plain-English step list), then click a
+         tool chip to light it, connect it into the current shape, and show a
+         note describing how that tool integrates into this shape. */
+      (function () {
+        var slide = document.getElementById('agent-wiring');
+        if (!slide) return;
+        var svg = slide.querySelector('.aw-svg');
+        var wiring = slide.querySelector('.aw-wiring');
+        var shapeBtns = slide.querySelectorAll('.aw-shape');
+        var tools = slide.querySelectorAll('.aw-tool');
+        var stepsList = slide.querySelector('.aw-steps');
+        var toolNote = slide.querySelector('.aw-toolnote');
+        var SVGNS = 'http://www.w3.org/2000/svg';
+        // Each shape exposes the anchor point its tool connector attaches to.
+        var activeAnchor = { x: 380, y: 144 };
+        var currentShape = 'sequential';
+        var currentTool = null;
+
+        var TOOL_NAMES = { web: 'web search', db: 'a database', code: 'code execution' };
+        var STEPS = {
+          sequential: [
+            'LLM A drafts a first answer.',
+            'LLM B improves it.',
+            'LLM C puts it in final form.'
+          ],
+          parallel: [
+            'The same input goes to LLM A, LLM B, and LLM C at once.',
+            'Their answers are combined into one.'
+          ],
+          dynamic: [
+            'LLM A reads the input.',
+            'It decides which path fits.',
+            'It sends the work to LLM B or LLM C.'
+          ],
+          looped: [
+            'LLM A produces a draft.',
+            'LLM B checks it against the goal.',
+            'If it falls short, it goes back to LLM A.',
+            'Repeat until it passes.'
+          ]
+        };
+        // Tool-integration notes per shape; {TOOL} is replaced with the clicked tool name.
+        var TOOL_NOTES = {
+          sequential: 'LLM B calls {TOOL}, and its result flows to LLM C.',
+          parallel: 'Each LLM can call {TOOL} on its own copy of the input, at the same time.',
+          dynamic: 'LLM A calls {TOOL} to gather what it needs, then decides which LLM runs next.',
+          looped: 'LLM B calls {TOOL} each round to check the work before deciding to loop or stop.'
+        };
+
+        function el(name, attrs) {
+          var n = document.createElementNS(SVGNS, name);
+          for (var k in attrs) { n.setAttribute(k, attrs[k]); }
+          return n;
+        }
+        function box(x, y, w, h, label, gold) {
+          var g = el('g', {});
+          g.appendChild(el('rect', { x: x, y: y, width: w, height: h, rx: 11,
+            fill: gold ? '#fff8df' : '#fff', stroke: gold ? '#f1b300' : '#191919', 'stroke-width': gold ? 2.5 : 2 }));
+          var t = el('text', { x: x + w / 2, y: y + h / 2 + 5, 'text-anchor': 'middle', 'class': 'aw-bt' });
+          t.textContent = label;
+          g.appendChild(t);
+          return g;
+        }
+        function line(x1, y1, x2, y2, gold) {
+          return el('line', { x1: x1, y1: y1, x2: x2, y2: y2,
+            stroke: gold ? '#f1b300' : '#191919', 'stroke-width': gold ? 3 : 2.5,
+            'marker-end': gold ? 'url(#awahg)' : 'url(#awah)' });
+        }
+        // SHAPES return the list of anchor points (bottom-centre of the LLM nodes
+        // a tool connects to) for the current shape, in the order the notes imply.
+        var SHAPES = {
+          sequential: function () {
+            wiring.appendChild(box(70, 96, 150, 48, 'LLM A', true));
+            wiring.appendChild(line(220, 120, 295, 120));
+            wiring.appendChild(box(295, 96, 150, 48, 'LLM B'));
+            wiring.appendChild(line(445, 120, 520, 120));
+            wiring.appendChild(box(520, 96, 150, 48, 'LLM C'));
+            // Tool wires into LLM B.
+            return [{ x: 370, y: 144 }];
+          },
+          parallel: function () {
+            wiring.appendChild(el('circle', { cx: 70, cy: 120, r: 9, fill: '#191919' }));
+            var labels = ['LLM A', 'LLM B', 'LLM C'];
+            var anchors = [];
+            [56, 120, 184].forEach(function (cy, i) {
+              wiring.appendChild(line(82, 120, 270, cy + 8));
+              wiring.appendChild(box(270, cy - 8, 160, 32, labels[i]));
+              wiring.appendChild(line(430, cy + 8, 628, 120));
+              anchors.push({ x: 350, y: cy + 24 });
+            });
+            wiring.appendChild(el('circle', { cx: 640, cy: 120, r: 9, fill: '#191919' }));
+            // Every LLM can call the tool, so connect all three.
+            return anchors;
+          },
+          dynamic: function () {
+            wiring.appendChild(box(70, 96, 150, 48, 'LLM A', true));
+            var targets = [['LLM B', 420, 64], ['LLM C', 420, 132]];
+            targets.forEach(function (w) {
+              wiring.appendChild(el('line', { x1: 220, y1: 120, x2: w[1] - 4, y2: w[2] + 16,
+                stroke: '#191919', 'stroke-width': 2, 'stroke-dasharray': '4 4', 'marker-end': 'url(#awah)' }));
+              wiring.appendChild(box(w[1], w[2], 160, 32, w[0]));
+            });
+            // Tool wires into LLM A, which gathers then routes.
+            return [{ x: 145, y: 144 }];
+          },
+          looped: function () {
+            wiring.appendChild(box(90, 96, 150, 48, 'LLM A', true));
+            wiring.appendChild(line(240, 120, 360, 120));
+            wiring.appendChild(box(360, 96, 150, 48, 'LLM B'));
+            // return arrow LLM B back to LLM A
+            wiring.appendChild(el('path', { d: 'M435,144 C 435,200 165,200 165,150', fill: 'none',
+              stroke: '#f1b300', 'stroke-width': 2.5, 'stroke-dasharray': '5 4', 'marker-end': 'url(#awahg)' }));
+            // Tool wires into LLM B (the checker).
+            return [{ x: 435, y: 144 }];
+          }
+        };
+
+        function renderSteps(name) {
+          while (stepsList.firstChild) { stepsList.removeChild(stepsList.firstChild); }
+          (STEPS[name] || STEPS.sequential).forEach(function (txt) {
+            var li = document.createElement('li');
+            li.textContent = txt;
+            stepsList.appendChild(li);
+          });
+        }
+        function renderToolNote() {
+          if (!currentTool) { toolNote.textContent = ''; toolNote.classList.remove('on'); return; }
+          var tmpl = TOOL_NOTES[currentShape] || TOOL_NOTES.sequential;
+          toolNote.textContent = tmpl.replace('{TOOL}', TOOL_NAMES[currentTool]);
+          toolNote.classList.add('on');
+        }
+
+        var toolAnchors = [{ x: 370, y: 144 }];
+        function redrawToolLines() {
+          // remove prior tool connectors, then draw a dotted line from each
+          // relevant LLM node down to the lit tool chip.
+          slide.querySelectorAll('.aw-toolline').forEach(function (l) { l.parentNode.removeChild(l); });
+          if (!currentTool) return;
+          var g = slide.querySelector('.aw-tool[data-tool="' + currentTool + '"]');
+          if (!g) return;
+          var r = g.querySelector('rect');
+          var tx = parseFloat(r.getAttribute('x')) + parseFloat(r.getAttribute('width')) / 2;
+          var ty = parseFloat(r.getAttribute('y'));
+          toolAnchors.forEach(function (a) {
+            wiring.appendChild(el('line', { x1: a.x, y1: a.y, x2: tx, y2: ty,
+              stroke: '#f1b300', 'stroke-width': 2.5, 'stroke-dasharray': '5 4',
+              'marker-end': 'url(#awahg)', 'class': 'aw-toolline' }));
+          });
+        }
+
+        function setShape(name) {
+          currentShape = name;
+          shapeBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-shape') === name); });
+          while (wiring.firstChild) { wiring.removeChild(wiring.firstChild); }
+          toolAnchors = (SHAPES[name] || SHAPES.sequential)();
+          renderSteps(name);
+          renderToolNote();
+          redrawToolLines();
+        }
+        function setTool(name) {
+          currentTool = name;
+          tools.forEach(function (g) { g.classList.toggle('lit', g.getAttribute('data-tool') === name); });
+          renderToolNote();
+          redrawToolLines();
+        }
+        shapeBtns.forEach(function (b) {
+          b.addEventListener('click', function () { setShape(b.getAttribute('data-shape')); });
+        });
+        tools.forEach(function (g) {
+          g.addEventListener('click', function () {
+            var t = g.getAttribute('data-tool');
+            setTool(currentTool === t ? null : t);
+          });
+        });
+        // Pre-activate a default so a static PDF export is not blank.
+        setShape('sequential');
+      })();
+    </script>
+    <script>
+      /* Reporting checklist: click a section card to load its checklist, click a
+         checklist line to show a reported example. All examples are from the
+         Amazon HQ2 stance-detection study (the May revision). */
+      (function () {
+        var slide = document.getElementById('report-checklist');
+        if (!slide) return;
+        var R = {
+          task: [
+            { k: 'Input data', ex: ['944 tweets about Amazon’s HQ2 location decision, from Stokan et al. (2025). For stance detection the unit is the tweet text; for author classification it is the author’s Twitter bio.'] },
+            { k: 'The task', ex: ['Stance detection sorts each tweet into four categories (Supportive, Neutral, Unsupportive, Not about Amazon). Author classification sorts each author into four stakeholder types.'] },
+            { k: 'Desired output structure', ex: ['Each response constrained to a predefined JSON schema, the stance or stakeholder label returned as structured output.'] }
+          ],
+          model: [
+            { k: 'Model name and version', ex: ['Four models were compared: Command A, GPT OSS, Phi 4, and Qwen 3.'] },
+            { k: 'Access method', ex: ['All four were accessed via on-premise, locally hosted deployment. Web interfaces like ChatGPT.com offer no parameter control and are unsuitable for peer-reviewed research.'] },
+            { k: 'Hyperparameter settings', ex: ['All hyperparameters (temperature, top-k and top-p, maximum prediction tokens) were held at default, since parameter adjustments require task-specific validation before adoption.'] },
+            { k: 'Input token descriptives', ex: ['For stance detection, Command A under the revised prompt averaged 562 tokens versus 212 under the established prompt, all within the context window so nothing was truncated.'] }
+          ],
+          prompt: [
+            { k: 'Full prompt template', ex: ['A template separates fixed structure from variable inputs, with four parts: a role or system message, task instructions, variable slots, and an output schema.'] },
+            { k: 'Prompt token descriptives', ex: ['Reported per model for each task. All counts fell well within the context windows; token-count variation was most pronounced for Qwen 3.'] },
+            { k: 'Justification of the strategy', ex: ['The revised prompt added contextual detail from the TaMPER framework. Prompt evaluation is warranted when prompts deviate from standards, definitions change, context is added or removed, or a benchmark is being set.'] },
+            { k: 'Structured output reporting', ex: ['Structured outputs constrained responses to the predefined JSON schema, with the code included as supplementary material, clarifying what the schema imposes versus what the model produced.'] }
+          ],
+          evaluation: [
+            { k: 'Evaluation criteria', ex: ['Three criteria: compliance (percent correct data type and missing data), trueness (deviation from a reference, via exact match, precision, recall, F1), and precision (consistency across five repeated runs, via agreement rate, ICC, or standard deviation).'] },
+            { k: 'Model evaluations', ex: ['Across both tasks Command A had the highest trueness. For author classification it reached 81.44 percent under the revised prompt versus 73.45 percent under the established prompt.'] },
+            { k: 'Prompt evaluations', ex: ['McNemar tests confirmed the revised prompt beat the established for three of four models on stance detection (Command A chi-squared 272.0, p &lt; 0.001). GPT OSS was the exception, indistinguishable from noise, so selection deferred to precision and compliance.'] },
+            { k: 'Evaluation benchmarks', ex: ['Precision came from five iterations per prompt-model pair. For stance detection Command A reached Krippendorff’s alpha 0.95 and 98.01 percent agreement under the revised prompt, versus 0.71 and 86.97 percent established.'] }
+          ]
+        };
+        var cards = slide.querySelectorAll('.rc-card');
+        var list = slide.querySelector('#rc-list');
+        var exBox = slide.querySelector('#rc-ex');
+        function showEx(item) {
+          exBox.innerHTML = item.ex.map(function (e) { return '<p class="rc-ex-line">' + e + '</p>'; }).join('');
+        }
+        function showCard(key) {
+          var items = R[key]; if (!items) return;
+          cards.forEach(function (c) { c.classList.toggle('active', c.getAttribute('data-rc') === key); });
+          list.innerHTML = '';
+          items.forEach(function (it) {
+            var liEl = document.createElement('li');
+            liEl.className = 'rc-item';
+            liEl.textContent = it.k;
+            liEl.addEventListener('click', function () {
+              list.querySelectorAll('.rc-item').forEach(function (x) { x.classList.remove('on'); });
+              liEl.classList.add('on');
+              showEx(it);
+            });
+            list.appendChild(liEl);
+          });
+          var first = list.querySelector('.rc-item');
+          if (first) { first.classList.add('on'); showEx(items[0]); }
+        }
+        cards.forEach(function (c) { c.addEventListener('click', function () { showCard(c.getAttribute('data-rc')); }); });
+        showCard('task');
+      })();
+    </script>
+  </body>
+</html>
