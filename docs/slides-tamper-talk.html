@@ -580,7 +580,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
               <h3>What gets evaluated</h3>
               <p style="margin-top:0.5rem;"><strong>Protocol</strong>: the framework, the decisions a researcher makes, and the workflow for assessing them.</p>
               <p style="font-size:0.78em; color:#595959; margin-top:0.6rem; font-style:italic;">
-                TaMPER &middot; Three decisions, two actions &middot; Two response formats &middot; Sample-Benchmark-Population
+                Prompts &middot; Models &middot; Dual Response Format
               </p>
             </article>
             <article class="slide-card" style="border-top:4px solid #191919;">
@@ -672,7 +672,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         <!-- [eval slide 12] -->
         <section class="eval-left">
           <p class="slide-kicker">Evaluation &middot; Response formats</p>
-          <h2>Two response formats, two evaluation paths</h2>
+          <h2>Dual Response Format</h2>
           <div style="background:#fff8df; border-left:6px solid #f1b300; padding:0.7rem 1rem; max-width:880px; margin:0.4rem auto 0.9rem; text-align:left; font-size:0.88em; line-height:1.5;">
             <p style="margin:0; color:#191919; font-size:0.78em; letter-spacing:0.05em; text-transform:uppercase; font-weight:700;">Prompt</p>
             <p style="margin:0.2rem 0 0.4rem;">Is this tweet toxic? Return a label and a brief explanation.</p>
@@ -682,18 +682,18 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
           <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
             <article class="slide-card" style="border-top:4px solid #f1b300;">
               <h3>Direct response</h3>
-              <p style="font-family:'Courier New',monospace; font-size:1.05em; margin:0.4rem 0;"><strong>True</strong></p>
+              <p style="font-family:'Courier New',monospace; font-size:1.05em; margin:0.4rem 0;">Example: <strong>True</strong></p>
               <p style="font-size:0.85em; color:#191919; margin-top:0.5rem; line-height:1.4;">
                 Evaluate with: <strong>compliance</strong>, <strong>accuracy</strong>, <strong>precision</strong>.
               </p>
             </article>
-            <article class="slide-card" style="border-top:4px solid #191919;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
               <h3>Explanation</h3>
               <p style="font-size:0.85em; font-style:italic; margin:0.4rem 0; line-height:1.4;">
-                "The comment directly insults the addressed users, which is rude and disrespectful..."
+                Example: "The comment directly insults the addressed users, which is rude and disrespectful..."
               </p>
               <p style="font-size:0.85em; color:#191919; margin-top:0.5rem; line-height:1.4;">
-                Evaluate with: <strong>LLM-as-judge</strong>, <strong>embeddings</strong>.
+                Evaluate with: <strong>compliance</strong>, <strong>quality</strong>.
               </p>
             </article>
           </div>
@@ -702,9 +702,9 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         <!-- [eval slide 16] -->
         <section class="eval-left">
           <p class="slide-kicker">Evaluation &middot; Criteria</p>
-          <h2>Two questions: signal in the data, health of the instrument</h2>
+          <h2>Signal, Noise, and criteria</h2>
           <div class="pillar-grid" style="grid-template-columns:1fr 1fr; margin-top:0.6rem;">
-            <article class="slide-card" style="border-top:4px solid #595959;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
               <h3>Signal in the data</h3>
               <p style="letter-spacing:0.06em; text-transform:uppercase; color:#595959; font-weight:700; margin:0.25rem 0 0.5rem;">Accuracy &middot; Precision</p>
               <p>Did the LLM read the data correctly, and how much of what we observe is real signal versus run-to-run noise?</p>
@@ -712,9 +712,10 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
             <article class="slide-card" style="border-top:4px solid #f1b300;">
               <h3>Health of the instrument</h3>
               <p style="letter-spacing:0.06em; text-transform:uppercase; color:#595959; font-weight:700; margin:0.25rem 0 0.5rem;">Compliance &middot; Quality</p>
-              <p>Is the measurement instrument actually working &mdash; producing parseable output and reasoning coherently about the inputs it sees?</p>
+              <p>Is the measurement instrument actually working and producing parseable output and reasoning coherently about the inputs it sees?</p>
             </article>
           </div>
+          <p style="text-align:center; margin:1rem auto 0; max-width:1000px; color:#191919; font-size:1em;">At a minimum, scholars should evaluate LLMs based on Compliance, Accuracy, and Precision criteria.</p>
         </section>
 
         <!-- Now an example: HQ2 stance-detection case -->
