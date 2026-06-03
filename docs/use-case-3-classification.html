@@ -17,7 +17,8 @@
       .reveal h3 { font-size: 1.05em; color: var(--muted); font-weight: 600; }
       .reveal .lead { font-size: 1.0em; color: var(--ink); max-width: 26em; margin: .2em auto; line-height: 1.45; }
       .reveal .left { text-align: left; }
-      .reveal ul.tight { display: inline-block; text-align: left; line-height: 1.5; font-size: .92em; }
+      .reveal ul.tight, .reveal ol.tight { display: inline-block; text-align: left; line-height: 1.5; font-size: .92em; }
+      .reveal ol.tight { padding-left: 1.4em; }
       .reveal .pill { display:inline-block; border:1px solid var(--line); border-radius:999px;
         padding:.12em .7em; margin:.18em; font-size:.62em; background:#fafafa; }
       .reveal .pill b { color: var(--accent); }
@@ -39,6 +40,9 @@
       .reveal .matrix td, .reveal .matrix th { border:1px solid var(--line); padding:.3em .7em; }
       .reveal .matrix th { background:#fafafa; }
       .reveal .note { color: var(--muted); font-size:.66em; margin-top:.5em; }
+      .reveal a.uc-colab { display:inline-block; margin-top:.6em; background:var(--accent); color:#111;
+        font-weight:700; text-decoration:none; padding:.35em 1.1em; border-radius:999px; font-size:.62em; }
+      .reveal a.uc-colab:hover { filter:brightness(0.95); }
       .reveal section.divider h2 { font-size:2.2em; }
       .reveal section.divider .uc-kicker { font-size:.6em; }
     </style>
@@ -54,6 +58,21 @@
           <p class="lead">Classifying <b>who is speaking</b> about a city's high-tech bid —
             run on open models through MindRouter, then evaluated on the TaMPER floor.</p>
           <p class="note">Compliance · Accuracy · Precision</p>
+          <p><a class="uc-colab" href="https://colab.research.google.com/github/mro0001/pmrc-genai-workshop/blob/main/use-case-3/use_case_3_classification_R_colab.ipynb">&#9658;&nbsp; Open the R notebook in Colab</a></p>
+        </section>
+
+        <!-- 1b — GOALS -->
+        <section data-background-color="#ffffff">
+          <p class="uc-kicker">Overview</p>
+          <h2>Goals</h2>
+          <ol class="tight">
+            <li>Set up and run <b>multi-category classification</b> of Twitter bios.</li>
+            <li>Use <b>Compliance, Accuracy, and Precision</b> to evaluate the output.</li>
+            <li>3 different models</li>
+            <li>2 different prompts</li>
+            <li>2 different temperatures</li>
+            <li>Structured outputs vs no structured outputs</li>
+          </ol>
         </section>
 
         <!-- 2 — TASK -->
@@ -63,7 +82,7 @@
           <ul class="tight">
             <li><b>Input:</b> 39 synthetic Twitter <b>bios</b> about a city's bid to land a high-tech innovation center.</li>
             <li><b>Goal:</b> label each author as one of four <b>user types</b>.</li>
-            <li><b>Reference:</b> every bio carries a human <b>gold label</b> (<code>usertype_label</code>) so we can score the model.</li>
+            <li><b>Reference:</b> every bio carries a human <b>gold standard</b> label (<code>usertype_label</code>) so we can score the model.</li>
           </ul>
           <p style="margin-top:.5em;">
             <span class="pill">General Public</span>
@@ -215,14 +234,14 @@ compliance_table &lt;- function(runs) runs |>
 
         <!-- 10 — ACCURACY concept -->
         <section data-background-color="#ffffff">
-          <p class="uc-kicker">2 · Accuracy (Trueness)</p>
+          <p class="uc-kicker">2 · Accuracy</p>
           <h2>Is it close to the human reference?</h2>
           <ul class="tight">
-            <li><b>Exact match</b> of the predicted label to the human gold label.</li>
+            <li><b>Exact match</b> of the predicted label to the human gold standard label.</li>
             <li>Reported per model × prompt; add macro <b>precision / recall / F1</b> for imbalanced classes.</li>
             <li>Differences between prompts (or models) are confirmed with <b>McNemar's test</b>, not eyeballed.</li>
           </ul>
-          <p class="note">"Trueness" = closeness to the reference. Distinct from <i>precision-the-criterion</i>, which is about consistency.</p>
+          <p class="note">Accuracy here means closeness to the reference. Distinct from <i>precision-the-criterion</i>, which is about consistency.</p>
         </section>
 
         <!-- 11 — ACCURACY code -->
@@ -230,7 +249,7 @@ compliance_table &lt;- function(runs) runs |>
           <p class="uc-kicker">2 · Accuracy — the code</p>
           <div class="codecols">
             <div class="codecol py"><span class="lbl">Python</span>
-<pre class="code"><span class="c"># exact match vs gold</span>
+<pre class="code"><span class="c"># exact match vs gold standard</span>
 def accuracy(recs):
     pairs = [(canon(r["category"]),
               canon(r["gold"])) for r in recs]
@@ -239,7 +258,7 @@ def accuracy(recs):
             </div>
             <div class="codecol r"><span class="lbl">R</span>
 <pre class="code"><span class="c"># tidyverse</span>
-trueness_table &lt;- function(runs) runs |>
+accuracy_table &lt;- function(runs) runs |>
   group_by(model, prompt) |>
   summarise(
     accuracy = 100*mean(pred == gold,
@@ -252,7 +271,7 @@ trueness_table &lt;- function(runs) runs |>
         <!-- ACCURACY results -->
         <section data-background-color="#ffffff">
           <p class="uc-kicker">2 · Accuracy — results</p>
-          <h2>How close to the human gold?</h2>
+          <h2>How close to the human gold standard?</h2>
           <table class="matrix">
             <tr><th>Model</th><th>Accuracy</th></tr>
             <tr><td>Qwen 3.6 (35B)</td><td>83.1%</td></tr>
@@ -315,7 +334,7 @@ binom.test(tab["1","0"],
             <tr><td>GPT-OSS vs Gemma 4</td><td>80.0 vs 82.4</td><td>12 / 16</td><td>0.572</td></tr>
           </table>
           <p class="note"><b>None are significant</b> (all <i>p</i> &gt; 0.05). The ~3-point accuracy gaps are noise —
-            on this task, model choice doesn't move trueness. (The prompt does — that's the matrix.)</p>
+            on this task, model choice doesn't move accuracy. (The prompt does — that's the matrix.)</p>
         </section>
 
         <!-- 12 — PRECISION concept -->
@@ -372,13 +391,53 @@ precision_table &lt;- function(runs) runs |>
             Gemma perfectly reproducible; GPT-OSS the most variable.</p>
         </section>
 
+        <!-- COMPARE · Prompt -->
+        <section data-background-color="#ffffff">
+          <p class="uc-kicker">Comparison · Prompt</p>
+          <h2>Detailed vs bare prompt</h2>
+          <table class="matrix">
+            <tr><th>Prompt</th><th>Compliance</th><th>Accuracy</th><th>Agreement</th><th>&alpha;</th></tr>
+            <tr><td>Reform (detailed)</td><td>100%</td><td><b>83.1%</b></td><td>97.4%</td><td>0.97</td></tr>
+            <tr><td>Org (simple)</td><td>100%</td><td>72.3%</td><td>87.2%</td><td>0.92</td></tr>
+          </table>
+          <p class="note"><b>McNemar (accuracy): p = 0.002 — significant.</b> The detailed prompt is meaningfully more
+            accurate (+11 pts) and more consistent. Qwen 3.6 · temp 0 · structured · 39 bios &times; 5.</p>
+        </section>
+
+        <!-- COMPARE · Temperature -->
+        <section data-background-color="#ffffff">
+          <p class="uc-kicker">Comparison · Temperature</p>
+          <h2>Temperature 0 vs 1</h2>
+          <table class="matrix">
+            <tr><th>Temperature</th><th>Compliance</th><th>Accuracy</th><th>Agreement</th><th>&alpha;</th></tr>
+            <tr><td>0</td><td>100%</td><td>83.1%</td><td><b>97.4%</b></td><td><b>0.97</b></td></tr>
+            <tr><td>1</td><td>100%</td><td>81.5%</td><td>84.6%</td><td>0.86</td></tr>
+          </table>
+          <p class="note"><b>McNemar (accuracy): p = 0.453 — not significant.</b> Temperature barely touches accuracy,
+            but it lowers <b>precision</b> (&alpha; 0.97 &rarr; 0.86). Qwen 3.6 · reform · structured · 39 bios &times; 5.</p>
+        </section>
+
+        <!-- COMPARE · Structured -->
+        <section data-background-color="#ffffff">
+          <p class="uc-kicker">Comparison · Structured output</p>
+          <h2>Schema-enforced vs free text</h2>
+          <table class="matrix">
+            <tr><th>Output</th><th>Compliance</th><th>Accuracy</th><th>Agreement</th><th>&alpha;</th></tr>
+            <tr><td>Structured</td><td>100%</td><td>83.1%</td><td>97.4%</td><td>0.97</td></tr>
+            <tr><td>Unstructured</td><td>100%</td><td>82.6%</td><td>89.7%</td><td>0.90</td></tr>
+          </table>
+          <p class="note"><b>McNemar (accuracy): p = 1.000 — not significant.</b> With the strong reform prompt Qwen is
+            already reliable, so structure adds little here — its payoff is larger with weak prompts. Qwen 3.6 · reform · temp 0 · 39 bios &times; 5.</p>
+        </section>
+
         <!-- CLOSE -->
         <section class="divider" data-background-color="#ffffff">
           <p class="uc-kicker">Use Case 3</p>
           <h2>One task, fully evaluated</h2>
-          <p class="lead">Three models, two temperatures, two prompts, structured vs not —
+          <p class="lead">Two temperatures, two prompts, structured vs not —
             scored on compliance, accuracy, and precision, in Python <i>and</i> R.</p>
           <p class="note">Script: <code>use_case_3_classification.py</code> · R suite: <code>evaluation_code.md</code></p>
+          <p><a class="uc-colab" href="https://colab.research.google.com/github/mro0001/pmrc-genai-workshop/blob/main/use-case-3/use_case_3_classification_R_colab.ipynb">&#9658;&nbsp; Try it yourself — R notebook in Colab</a></p>
         </section>
 
       </div>
