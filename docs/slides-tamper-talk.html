@@ -510,48 +510,20 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
             <article class="slide-card" style="border-top:4px solid #595959;">
               <h3>You require a schema</h3>
               <pre class="so-code">{
-  "stance": "Supportive | Neutral |
-            Unsupportive | Not about Amazon",
-  "confidence": 0.0,
+  "organizational_misconduct": "yes | no",
   "explanation": "string"
 }</pre>
             </article>
             <article class="slide-card" style="border-top:4px solid #f1b300;">
               <h3>The model must return</h3>
               <pre class="so-code">{
-  "stance": "Unsupportive",
-  "confidence": 0.86,
-  "explanation": "The author criticizes
-                 the tax subsidy."
+  "organizational_misconduct": "yes",
+  "explanation": "The report details
+                 concealed safety violations."
 }</pre>
             </article>
           </div>
           <p class="closing-line">Why it matters. Compliance jumps to about 100 percent, every answer parses the same way, and you can separate what the schema imposed from what the model actually decided.</p>
-        </section>
-
-        <!-- Agents bridge: the same prompt components, relabeled in an agentic system -->
-        <section id="agent-relabel" data-background-color="#ffffff">
-          <p class="slide-kicker">Agents &middot; Same parts, new names</p>
-          <h2>In an agent the prompt parts get relabeled</h2>
-          <p class="pc-hint">Nothing new is invented. Three of the five components you just learned move out of one block of text and become standing parts of the system.</p>
-          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr); margin-top:0.5rem;">
-            <article class="slide-card" style="border-top:4px solid #f1b300;">
-              <h3>Context becomes memory</h3>
-              <p>What you pasted in is now what the agent stores and re-retrieves.</p>
-              <p class="silver-note" style="margin-top:0.3rem;">Definitions and data arrive per task from memory, a database, or search instead of being retyped.</p>
-            </article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;">
-              <h3>Instructions become steps</h3>
-              <p>One prose list of steps becomes separate LLM calls.</p>
-              <p class="silver-note" style="margin-top:0.3rem;">Each step is its own call or tool call the harness runs in turn, not a paragraph the model narrates.</p>
-            </article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;">
-              <h3>Output becomes a handoff</h3>
-              <p>The answer is no longer final.<br>It is passed forward.</p>
-              <p class="silver-note" style="margin-top:0.3rem;">Each result feeds the next step, tool, or agent rather than going straight back to you.</p>
-            </article>
-          </div>
-          <p class="closing-line">Same jobs you learned in the Prompt section. In one prompt you typed them in a row, in an agent the system holds each one. <a class="cite" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">(Anthropic 2025)</a></p>
         </section>
 
         <!-- ═══════ §6 — EVALUATION (consolidated from the LLM evaluation deck) ═══════ -->
