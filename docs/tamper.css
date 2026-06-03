@@ -1548,3 +1548,16 @@
 }
 .reveal .tdivider > * { position:relative; z-index:1; }
 .reveal .tdivider .gold-rule { margin:0.6rem auto 0.8rem; }
+
+/* ── Imported evaluation-presentation slides (class="eval-import") ──
+   These §2-§5 slides were lifted verbatim from the original evaluation deck,
+   which has no tamper.css. Restore that deck's roomier kicker + card scale and
+   left-justify the card text, overriding this deck's compact defaults. The
+   inline top-border accent colors travel with the markup, so they already match. */
+.reveal .eval-import .slide-kicker { font-size: 0.8rem; line-height: 1.3; letter-spacing: 0.16em; margin-bottom: 0.9rem; }
+.reveal .eval-import .slide-card { padding: 1rem 1.05rem; text-align: left; }
+.reveal .eval-import .slide-card h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.12; }
+.reveal .eval-import .slide-card p,
+.reveal .eval-import .slide-card li { font-size: 1rem; line-height: 1.42; text-align: left; }
+.reveal .eval-import .slide-card ul,
+.reveal .eval-import .slide-card ol { font-size: 1rem; }

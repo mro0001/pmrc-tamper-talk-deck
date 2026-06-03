@@ -536,22 +536,11 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
           <p class="tamper-sub">How do you know the output is any good?</p>
         </section>
 
-        <!-- How do we know the output is good? -->
-        <section data-background-color="#ffffff">
-          <p class="slide-kicker">Evaluation</p>
-          <h2>How do we know the output is good?</h2>
-          <p class="silver-note" style="text-align:center; max-width:1000px; margin:0 auto 0.5rem;">Treat the LLM as a measurement instrument, not a tool and not a person.</p>
-          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card" style="border-top:4px solid #595959;"><h3>Signal in the data</h3><p style="text-align:left;">Accuracy<br>Precision</p></article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Health of the instrument</h3><p style="text-align:left;">Compliance<br>Quality</p></article>
-          </div>
-        </section>
-
         <!-- ════════ IMPORTED from evaluation_presentation/docs/slides-evaluation.html ════════
-             Slides 8-12 and 15-20, inserted after slide 25 (How do we know the output is good?).
-             Verbatim copy, pending integration/dedup. Tamper originals intentionally kept. ════════ -->
+             The §2-§5 evaluation slides (class="eval-import"), styled to the original
+             evaluation deck via the .eval-import rules in tamper.css. ════════ -->
         <!-- [eval slide 8] -->
-        <section>
+        <section class="eval-import">
           <p class="slide-kicker">§2 · The metrology pivot</p>
           <h2>From classical measurement to metrology</h2>
           <p class="silver-note" style="text-align:center; margin:0 auto 0.7rem; max-width:900px;">
@@ -583,7 +572,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 9] -->
-        <section>
+        <section class="eval-import">
           <p class="slide-kicker">From foundation to practice</p>
           <h2>What gets evaluated, and how</h2>
           <div class="pillar-grid" style="grid-template-columns:1fr 1fr; margin-top:0.6rem;">
@@ -605,7 +594,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 10] -->
-        <section data-auto-animate>
+        <section class="eval-import" data-auto-animate>
           <p class="slide-kicker">§3 · The protocol</p>
           <h2 data-id="tamper-title">The TaMPER framework</h2>
           <p class="silver-note" style="margin:0 auto 0.7rem; max-width:880px; text-align:center;">
@@ -641,7 +630,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 11] -->
-        <section data-auto-animate>
+        <section class="eval-import" data-auto-animate>
           <p class="slide-kicker">§3 · The protocol</p>
           <h2 data-id="tamper-title">Three decisions, two actions</h2>
           <div style="max-width:920px; margin:0.4rem auto 0;">
@@ -681,7 +670,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 12] -->
-        <section>
+        <section class="eval-import">
           <p class="slide-kicker">§3 · The protocol</p>
           <h2>Two response formats, two evaluation paths</h2>
           <div style="background:#fff8df; border-left:6px solid #f1b300; padding:0.7rem 1rem; max-width:880px; margin:0.4rem auto 0.9rem; text-align:left; font-size:0.88em; line-height:1.5;">
@@ -711,7 +700,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 15] -->
-        <section>
+        <section class="eval-import">
           <p class="slide-kicker">§4 · Criteria overview</p>
           <h2>The minimum floor: Compliance &rarr; Accuracy &rarr; Precision</h2>
           <div class="crit-flow">
@@ -754,7 +743,7 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
         </section>
 
         <!-- [eval slide 16] -->
-        <section>
+        <section class="eval-import">
           <p class="slide-kicker">§4 · Criteria overview</p>
           <h2>Two questions: signal in the data, health of the instrument</h2>
           <div class="pillar-grid" style="grid-template-columns:1fr 1fr; margin-top:0.6rem;">
@@ -768,193 +757,6 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
               <p style="letter-spacing:0.06em; text-transform:uppercase; color:#595959; font-weight:700; margin:0.25rem 0 0.5rem;">Compliance &middot; Quality</p>
               <p>Is the measurement instrument actually working &mdash; producing parseable output and reasoning coherently about the inputs it sees?</p>
             </article>
-          </div>
-        </section>
-
-        <!-- [eval slide 17] -->
-        <section>
-          <p class="slide-kicker">§5 · Compliance</p>
-          <h2>Compliance: does the output match the required structure?</h2>
-          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card">
-              <h3>What it measures</h3>
-              <p>Schema match. Are the fields, types, and labels what was requested?</p>
-            </article>
-            <article class="slide-card">
-              <h3>Metrics</h3>
-              <ul>
-                <li>% correct data type</li>
-                <li>% missing fields</li>
-                <li>Schema validation rate</li>
-              </ul>
-            </article>
-          </div>
-          <div class="results-callout">
-            <p class="results-label">HQ2 case &middot; Compliance (stance detection)</p>
-            <table class="results-table">
-              <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Established prompt</th>
-                  <th>Revised prompt</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Command A</td><td>99.98%</td><td>100.00%</td></tr>
-                <tr><td>GPT OSS</td><td>100.00%</td><td>100.00%</td></tr>
-                <tr><td>Phi 4</td><td>100.00%</td><td>100.00%</td></tr>
-                <tr><td>Qwen 3</td><td>100.00%</td><td>100.00%</td></tr>
-              </tbody>
-            </table>
-            <p class="results-takeaway">Structured outputs delivered ~100% compliance across every cell.</p>
-          </div>
-        </section>
-
-        <!-- [eval slide 18] -->
-        <section>
-          <p class="slide-kicker">§5 · Accuracy</p>
-          <h2>Accuracy: how close to a reference value?</h2>
-          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card">
-              <h3>What it measures</h3>
-              <p>Closeness of measurements to a reference, whether objective ground truth or expert human judgment. Captures systematic deviation.</p>
-              <p style="color:#595959; margin-top:0.5rem;">Corresponds to validity in classical terms.</p>
-            </article>
-            <article class="slide-card">
-              <h3>Per-output metrics</h3>
-              <ul>
-                <li>Exact match</li>
-                <li>F1 score</li>
-                <li>Classification precision (PPV), recall</li>
-                <li>Correlation with human coding</li>
-              </ul>
-            </article>
-          </div>
-          <div class="results-callout">
-            <p class="results-label">HQ2 case &middot; Accuracy (stance detection)</p>
-            <table class="results-table">
-              <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Established prompt</th>
-                  <th>Revised prompt</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td></tr>
-                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td></tr>
-                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td></tr>
-                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td></tr>
-              </tbody>
-            </table>
-            <p class="results-takeaway">Are these differences real, or noise? The next slide answers that.</p>
-          </div>
-        </section>
-
-        <!-- [eval slide 19] -->
-        <section>
-          <p class="slide-kicker">§5 · Accuracy &middot; Signal vs. noise</p>
-          <h2>Statistical-difference tests separate signal from noise</h2>
-          <article class="slide-card" style="max-width:760px; margin:0.4rem auto 0;">
-            <h3>Tests</h3>
-            <ul>
-              <li><strong>McNemar:</strong> accuracy differences (paired)</li>
-              <li><strong>Kolmogorov-Smirnov:</strong> distribution differences</li>
-              <li><strong>Mann-Whitney U:</strong> median rank differences</li>
-              <li><strong>Wasserstein:</strong> overall distribution distance</li>
-              <li><strong>Welch's t:</strong> mean differences, unequal variance</li>
-            </ul>
-          </article>
-          <div class="results-callout">
-            <p class="results-label">HQ2 case &middot; Accuracy with McNemar (stance detection)</p>
-            <table class="results-table">
-              <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Established</th>
-                  <th>Revised</th>
-                  <th>McNemar &chi;&sup2;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td><td>272.0***</td></tr>
-                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td><td class="row-naive">153.0</td></tr>
-                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td><td>379.0***</td></tr>
-                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td><td>280.0**</td></tr>
-              </tbody>
-            </table>
-            <p class="results-takeaway">GPT OSS difference is noise (p &gt; 0.05); the framework directs you to the next criterion. <span style="color:#595959;">* p&lt;.05 &middot; ** p&lt;.01 &middot; *** p&lt;.001</span></p>
-          </div>
-        </section>
-
-        <!-- [eval slide 20] -->
-        <section>
-          <p class="slide-kicker">§5 · Precision</p>
-          <h2>Precision: how consistent across repeated runs?</h2>
-          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card">
-              <h3>What it measures</h3>
-              <p>Output consistency under repeated application to the same input. <strong>5+ iterations</strong>.</p>
-              <p style="color:#595959; margin-top:0.5rem;">Not the classification "precision" (PPV). Corresponds to reliability in classical terms.</p>
-            </article>
-            <article class="slide-card">
-              <h3>Metrics</h3>
-              <ul>
-                <li><strong>Agreement rate</strong> (categorical)</li>
-                <li><strong>Standard deviation</strong> (numeric)</li>
-                <li><strong>ICC</strong> (ordinal)</li>
-                <li><strong>Krippendorff's &alpha;</strong> (mixed types)</li>
-              </ul>
-            </article>
-          </div>
-          <div class="results-callout">
-            <p class="results-label">HQ2 case &middot; Precision (stance detection, 5 iterations)</p>
-            <table class="results-table">
-              <thead>
-                <tr>
-                  <th rowspan="2">Model</th>
-                  <th colspan="2" class="th-group">Krippendorff's &alpha;</th>
-                  <th colspan="2" class="th-group">Agreement rate</th>
-                </tr>
-                <tr>
-                  <th class="th-sub">Established</th>
-                  <th class="th-sub">Revised</th>
-                  <th class="th-sub">Established</th>
-                  <th class="th-sub">Revised</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Command A</td><td>0.71</td><td class="row-win">0.95</td><td>86.97%</td><td class="row-win">98.01%</td></tr>
-                <tr><td>GPT OSS</td><td>0.89</td><td>0.90</td><td>96.06%</td><td>96.44%</td></tr>
-                <tr><td>Phi 4</td><td>0.72</td><td class="row-win">0.81</td><td>88.03%</td><td class="row-win">91.89%</td></tr>
-                <tr><td>Qwen 3</td><td>0.74</td><td class="row-win">0.83</td><td>89.77%</td><td class="row-win">93.52%</td></tr>
-              </tbody>
-            </table>
-            <p class="results-takeaway">Precision broke the tie for Command A: same accuracy region, dramatically tighter agreement.</p>
-          </div>
-        </section>
-
-        <!-- ════════ END IMPORTED slides ════════ -->
-
-        <!-- Two response formats -->
-        <section data-background-color="#ffffff">
-          <p class="slide-kicker">Evaluation &middot; Protocol</p>
-          <h2>Dual Response Protocol</h2>
-          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Direct response</h3><p>Scored on compliance, accuracy, and precision.</p></article>
-            <article class="slide-card" style="border-top:4px solid #191919;"><h3>Explanation</h3><p>Scored on quality, and checked with an ensemble of judges.</p></article>
-          </div>
-          <p class="closing-line">Evaluating the explanation lets you audit reasoning when there is no single fact to check.</p>
-        </section>
-
-        <!-- The minimum floor -->
-        <section data-background-color="#ffffff">
-          <p class="slide-kicker">Evaluation &middot; Criteria</p>
-          <h2>The minimum floor</h2>
-          <div class="pillar-grid" style="grid-template-columns:repeat(3,1fr);">
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Compliance</h3><p>Does the output match the required structure?</p></article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Accuracy</h3><p>How close to a reference value?</p></article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Precision</h3><p>How consistent across repeated runs?</p></article>
           </div>
         </section>
 
@@ -997,18 +799,34 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
           </article>
         </section>
 
-        <!-- Worked example: Compliance in action -->
-        <section data-background-color="#ffffff">
-          <p class="slide-kicker">Evaluation &middot; Compliance in action</p>
-          <h2>Compliance, does the output match the required structure?</h2>
+        <!-- [eval slide 17] -->
+        <section class="eval-import">
+          <p class="slide-kicker">§5 · Compliance</p>
+          <h2>Compliance: does the output match the required structure?</h2>
           <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>What it measures</h3><p>Schema match. Are the fields, types, and labels the ones that were requested?</p></article>
-            <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Metrics</h3><ul><li>Percent correct data type</li><li>Percent missing fields</li><li>Schema validation rate</li></ul></article>
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Schema match. Are the fields, types, and labels what was requested?</p>
+            </article>
+            <article class="slide-card">
+              <h3>Metrics</h3>
+              <ul>
+                <li>% correct data type</li>
+                <li>% missing fields</li>
+                <li>Schema validation rate</li>
+              </ul>
+            </article>
           </div>
           <div class="results-callout">
             <p class="results-label">HQ2 case &middot; Compliance (stance detection)</p>
             <table class="results-table">
-              <thead><tr><th>Model</th><th>Established prompt</th><th>Revised prompt</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established prompt</th>
+                  <th>Revised prompt</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr><td>Command A</td><td>99.98%</td><td>100.00%</td></tr>
                 <tr><td>GPT OSS</td><td>100.00%</td><td>100.00%</td></tr>
@@ -1016,7 +834,131 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
                 <tr><td>Qwen 3</td><td>100.00%</td><td>100.00%</td></tr>
               </tbody>
             </table>
-            <p class="results-takeaway">Structured outputs delivered about 100 percent compliance in every cell, so the floor is cleared and we move on.</p>
+            <p class="results-takeaway">Structured outputs delivered ~100% compliance across every cell.</p>
+          </div>
+        </section>
+
+        <!-- [eval slide 18] -->
+        <section class="eval-import">
+          <p class="slide-kicker">§5 · Accuracy</p>
+          <h2>Accuracy: how close to a reference value?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Closeness of measurements to a reference, whether objective ground truth or expert human judgment. Captures systematic deviation.</p>
+              <p style="color:#595959; margin-top:0.5rem;">Corresponds to validity in classical terms.</p>
+            </article>
+            <article class="slide-card">
+              <h3>Per-output metrics</h3>
+              <ul>
+                <li>Exact match</li>
+                <li>F1 score</li>
+                <li>Classification precision (PPV), recall</li>
+                <li>Correlation with human coding</li>
+              </ul>
+            </article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Accuracy (stance detection)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established prompt</th>
+                  <th>Revised prompt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td></tr>
+                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td></tr>
+                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td></tr>
+                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Are these differences real, or noise? The next slide answers that.</p>
+          </div>
+        </section>
+
+        <!-- [eval slide 19] -->
+        <section class="eval-import">
+          <p class="slide-kicker">§5 · Accuracy &middot; Signal vs. noise</p>
+          <h2>Statistical-difference tests separate signal from noise</h2>
+          <article class="slide-card" style="max-width:760px; margin:0.4rem auto 0;">
+            <h3>Tests</h3>
+            <ul>
+              <li><strong>McNemar:</strong> accuracy differences (paired)</li>
+              <li><strong>Kolmogorov-Smirnov:</strong> distribution differences</li>
+              <li><strong>Mann-Whitney U:</strong> median rank differences</li>
+              <li><strong>Wasserstein:</strong> overall distribution distance</li>
+              <li><strong>Welch's t:</strong> mean differences, unequal variance</li>
+            </ul>
+          </article>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Accuracy with McNemar (stance detection)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established</th>
+                  <th>Revised</th>
+                  <th>McNemar &chi;&sup2;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td><td>272.0***</td></tr>
+                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td><td class="row-naive">153.0</td></tr>
+                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td><td>379.0***</td></tr>
+                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td><td>280.0**</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">GPT OSS difference is noise (p &gt; 0.05); the framework directs you to the next criterion. <span style="color:#595959;">* p&lt;.05 &middot; ** p&lt;.01 &middot; *** p&lt;.001</span></p>
+          </div>
+        </section>
+
+        <!-- [eval slide 20] -->
+        <section class="eval-import">
+          <p class="slide-kicker">§5 · Precision</p>
+          <h2>Precision: how consistent across repeated runs?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Output consistency under repeated application to the same input. <strong>5+ iterations</strong>.</p>
+              <p style="color:#595959; margin-top:0.5rem;">Not the classification "precision" (PPV). Corresponds to reliability in classical terms.</p>
+            </article>
+            <article class="slide-card">
+              <h3>Metrics</h3>
+              <ul>
+                <li><strong>Agreement rate</strong> (categorical)</li>
+                <li><strong>Standard deviation</strong> (numeric)</li>
+                <li><strong>ICC</strong> (ordinal)</li>
+                <li><strong>Krippendorff's &alpha;</strong> (mixed types)</li>
+              </ul>
+            </article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Precision (stance detection, 5 iterations)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">Model</th>
+                  <th colspan="2" class="th-group">Krippendorff's &alpha;</th>
+                  <th colspan="2" class="th-group">Agreement rate</th>
+                </tr>
+                <tr>
+                  <th class="th-sub">Established</th>
+                  <th class="th-sub">Revised</th>
+                  <th class="th-sub">Established</th>
+                  <th class="th-sub">Revised</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>0.71</td><td class="row-win">0.95</td><td>86.97%</td><td class="row-win">98.01%</td></tr>
+                <tr><td>GPT OSS</td><td>0.89</td><td>0.90</td><td>96.06%</td><td>96.44%</td></tr>
+                <tr><td>Phi 4</td><td>0.72</td><td class="row-win">0.81</td><td>88.03%</td><td class="row-win">91.89%</td></tr>
+                <tr><td>Qwen 3</td><td>0.74</td><td class="row-win">0.83</td><td>89.77%</td><td class="row-win">93.52%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Precision broke the tie for Command A: same accuracy region, dramatically tighter agreement.</p>
           </div>
         </section>
 
