@@ -547,6 +547,395 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
           </div>
         </section>
 
+        <!-- ════════ IMPORTED from evaluation_presentation/docs/slides-evaluation.html ════════
+             Slides 8-12 and 15-20, inserted after slide 25 (How do we know the output is good?).
+             Verbatim copy, pending integration/dedup. Tamper originals intentionally kept. ════════ -->
+        <!-- [eval slide 8] -->
+        <section>
+          <p class="slide-kicker">§2 · The metrology pivot</p>
+          <h2>From classical measurement to metrology</h2>
+          <p class="silver-note" style="text-align:center; margin:0 auto 0.7rem; max-width:900px;">
+            Classical measurement assumes a true score. Metrology asks how wide the plausible range is when no true score exists.
+          </p>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #595959;">
+              <h3 style="color:#595959;">Classical frame</h3>
+              <p class="slide-formula">observed = true score + error</p>
+              <p style="font-style:italic;">Is this measurement right or wrong relative to a known true value?</p>
+              <p style="margin-top:0.5rem;"><a class="cite" href="https://psycnet.apa.org/record/1968-35040-000" target="_blank" rel="noopener">(Lord &amp; Novick 1968, classical test theory)</a></p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Metrological frame</h3>
+              <p class="slide-formula">measurement result = best estimate &plusmn; uncertainty</p>
+              <p style="font-style:italic;">How much confidence can we place in this measurement?</p>
+              <p style="margin-top:0.5rem;"><a class="cite" href="https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf" target="_blank" rel="noopener">(JCGM 100:2008, GUM &sect;6.2.1)</a></p>
+            </article>
+          </div>
+          <p style="text-align:center; font-style:italic; color:#191919; margin:0.9rem auto 0.6rem; font-size:1em;">
+            Treat the LLM as a measurement instrument.
+          </p>
+          <div class="vocab-swap">
+            <span class="vocab-swap-label">Vocabulary shifts</span>
+            <span class="vocab-pair"><span class="from">validity</span><span class="arr">&rarr;</span><span class="to">accuracy</span></span>
+            <span class="vocab-pair"><span class="from">reliability</span><span class="arr">&rarr;</span><span class="to">precision</span></span>
+            <span class="vocab-pair"><span class="from">error</span><span class="arr">&rarr;</span><span class="to">uncertainty</span></span>
+          </div>
+        </section>
+
+        <!-- [eval slide 9] -->
+        <section>
+          <p class="slide-kicker">From foundation to practice</p>
+          <h2>What gets evaluated, and how</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr; margin-top:0.6rem;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>What gets evaluated</h3>
+              <p style="margin-top:0.5rem;"><strong>Protocol</strong>: the framework, the decisions a researcher makes, and the workflow for assessing them.</p>
+              <p style="font-size:0.78em; color:#595959; margin-top:0.6rem; font-style:italic;">
+                TaMPER &middot; Three decisions, two actions &middot; Two response formats &middot; Sample-Benchmark-Population
+              </p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #191919;">
+              <h3>How it gets evaluated</h3>
+              <p style="margin-top:0.5rem;"><strong>Criteria and Metrics</strong>: the specific things we measure, and the numbers we use to measure them.</p>
+              <p style="font-size:0.78em; color:#595959; margin-top:0.6rem; font-style:italic;">
+                Compliance &middot; Accuracy &middot; Precision &middot; Quality
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- [eval slide 10] -->
+        <section data-auto-animate>
+          <p class="slide-kicker">§3 · The protocol</p>
+          <h2 data-id="tamper-title">The TaMPER framework</h2>
+          <p class="silver-note" style="margin:0 auto 0.7rem; max-width:880px; text-align:center;">
+            Five components for documenting and evaluating any LLM-assisted analysis <a class="cite" href="https://arxiv.org/abs/2504.01037" target="_blank" rel="noopener">(Overton et al. 2025)</a>.
+          </p>
+          <div class="pillar-grid" style="grid-template-columns:repeat(5,1fr); gap:0.5rem;">
+            <article class="slide-card" data-id="card-T" style="border-top:4px solid #f1b300;">
+              <h3 style="font-size:1.3em; margin:0;">T</h3>
+              <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Task</p>
+              <p style="font-size:0.78em; margin:0;">What you want the LLM to do.</p>
+            </article>
+            <article class="slide-card" data-id="card-M" style="border-top:4px solid #f1b300;">
+              <h3 style="font-size:1.3em; margin:0;">M</h3>
+              <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Model</p>
+              <p style="font-size:0.78em; margin:0;">Which LLM, configured how.</p>
+            </article>
+            <article class="slide-card" data-id="card-P" style="border-top:4px solid #f1b300;">
+              <h3 style="font-size:1.3em; margin:0;">P</h3>
+              <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Prompt</p>
+              <p style="font-size:0.78em; margin:0;">How you instruct it.</p>
+            </article>
+            <article class="slide-card" data-id="card-E" style="border-top:4px solid #191919;">
+              <h3 style="font-size:1.3em; margin:0;">E</h3>
+              <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Evaluation</p>
+              <p style="font-size:0.78em; margin:0;">How you validate the outputs.</p>
+            </article>
+            <article class="slide-card" data-id="card-R" style="border-top:4px solid #191919;">
+              <h3 style="font-size:1.3em; margin:0;">R</h3>
+              <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Reporting</p>
+              <p style="font-size:0.78em; margin:0;">How you document everything.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- [eval slide 11] -->
+        <section data-auto-animate>
+          <p class="slide-kicker">§3 · The protocol</p>
+          <h2 data-id="tamper-title">Three decisions, two actions</h2>
+          <div style="max-width:920px; margin:0.4rem auto 0;">
+            <p style="text-align:center; color:#595959; font-size:0.74em; letter-spacing:0.12em; text-transform:uppercase; margin:0 0 0.45rem; font-weight:600;">Decision points &middot; what the researcher chooses</p>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem;">
+              <article class="slide-card" data-id="card-T" style="border-top:4px solid #f1b300;">
+                <h3 style="font-size:1.3em; margin:0;">T</h3>
+                <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Task</p>
+                <p style="font-size:0.78em; margin:0;">What is being measured?</p>
+              </article>
+              <article class="slide-card" data-id="card-M" style="border-top:4px solid #f1b300;">
+                <h3 style="font-size:1.3em; margin:0;">M</h3>
+                <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Model</p>
+                <p style="font-size:0.78em; margin:0;">Which instrument?</p>
+              </article>
+              <article class="slide-card" data-id="card-P" style="border-top:4px solid #f1b300;">
+                <h3 style="font-size:1.3em; margin:0;">P</h3>
+                <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Prompt</p>
+                <p style="font-size:0.78em; margin:0;">How is the instrument configured?</p>
+              </article>
+            </div>
+            <div style="text-align:center; margin:0.55rem 0; color:#f1b300; font-size:1.7em; line-height:1; font-weight:700;">&darr;</div>
+            <p style="text-align:center; color:#191919; font-size:0.74em; letter-spacing:0.12em; text-transform:uppercase; margin:0 0 0.45rem; font-weight:600;">Actions on those decisions</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+              <article class="slide-card" data-id="card-E" style="border-top:4px solid #191919;">
+                <h3 style="font-size:1.3em; margin:0;">E</h3>
+                <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Evaluation</p>
+                <p style="font-size:0.78em; margin:0;">Validate the chosen task, model, and prompt against compliance, accuracy, and precision.</p>
+              </article>
+              <article class="slide-card" data-id="card-R" style="border-top:4px solid #191919;">
+                <h3 style="font-size:1.3em; margin:0;">R</h3>
+                <p style="font-size:0.9em; font-weight:600; margin:0.3rem 0;">Reporting</p>
+                <p style="font-size:0.78em; margin:0;">Document each decision and its validation in a way a reviewer can audit.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- [eval slide 12] -->
+        <section>
+          <p class="slide-kicker">§3 · The protocol</p>
+          <h2>Two response formats, two evaluation paths</h2>
+          <div style="background:#fff8df; border-left:6px solid #f1b300; padding:0.7rem 1rem; max-width:880px; margin:0.4rem auto 0.9rem; text-align:left; font-size:0.88em; line-height:1.5;">
+            <p style="margin:0; color:#191919; font-size:0.78em; letter-spacing:0.05em; text-transform:uppercase; font-weight:700;">Prompt</p>
+            <p style="margin:0.2rem 0 0.4rem;">Is this tweet toxic? Return a label and a brief explanation.</p>
+            <p style="margin:0; color:#191919; font-size:0.78em; letter-spacing:0.05em; text-transform:uppercase; font-weight:700;">Tweet</p>
+            <p style="margin:0.2rem 0; font-family:'Courier New',monospace;">@hammyp703 @Reuters Fake news try again loser</p>
+          </div>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Direct response</h3>
+              <p style="font-family:'Courier New',monospace; font-size:1.05em; margin:0.4rem 0;"><strong>True</strong></p>
+              <p style="font-size:0.85em; color:#191919; margin-top:0.5rem; line-height:1.4;">
+                Evaluate with: <strong>compliance</strong>, <strong>accuracy</strong>, <strong>precision</strong>.
+              </p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #191919;">
+              <h3>Explanation</h3>
+              <p style="font-size:0.85em; font-style:italic; margin:0.4rem 0; line-height:1.4;">
+                "The comment directly insults the addressed users, which is rude and disrespectful..."
+              </p>
+              <p style="font-size:0.85em; color:#191919; margin-top:0.5rem; line-height:1.4;">
+                Evaluate with: <strong>LLM-as-judge</strong>, <strong>embeddings</strong>.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- [eval slide 15] -->
+        <section>
+          <p class="slide-kicker">§4 · Criteria overview</p>
+          <h2>The minimum floor: Compliance &rarr; Accuracy &rarr; Precision</h2>
+          <div class="crit-flow">
+            <div class="step">Compliance</div>
+            <div class="step">Accuracy</div>
+            <div class="step">Precision</div>
+          </div>
+
+          <div style="max-width:1100px; margin:0.7rem auto 0;">
+            <div class="quality-tree">
+              <div class="quality-tree-header">
+                <span class="quality-umbrella">Quality</span>
+                <span class="quality-tagline">presupposes the floor</span>
+              </div>
+              <div class="quality-grid" style="grid-template-columns:repeat(4, 1fr);">
+                <div class="quality-cat">
+                  <div class="quality-cat-name">Linguistic</div>
+                  <div class="quality-leaf">Fluency</div>
+                  <div class="quality-leaf">Coherence</div>
+                </div>
+                <div class="quality-cat">
+                  <div class="quality-cat-name">Logic</div>
+                  <div class="quality-leaf">Entailment</div>
+                  <div class="quality-leaf">Plausibility</div>
+                </div>
+                <div class="quality-cat">
+                  <div class="quality-cat-name">Information Fidelity</div>
+                  <div class="quality-leaf">Factuality</div>
+                  <div class="quality-leaf">Faithfulness</div>
+                  <div class="quality-leaf">Relevance</div>
+                </div>
+                <div class="quality-cat">
+                  <div class="quality-cat-name">Informativeness</div>
+                  <div class="quality-leaf">Information depth</div>
+                  <div class="quality-leaf">Restatement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- [eval slide 16] -->
+        <section>
+          <p class="slide-kicker">§4 · Criteria overview</p>
+          <h2>Two questions: signal in the data, health of the instrument</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr; margin-top:0.6rem;">
+            <article class="slide-card" style="border-top:4px solid #595959;">
+              <h3>Signal in the data</h3>
+              <p style="letter-spacing:0.06em; text-transform:uppercase; color:#595959; font-weight:700; margin:0.25rem 0 0.5rem;">Accuracy &middot; Precision</p>
+              <p>Did the LLM read the data correctly, and how much of what we observe is real signal versus run-to-run noise?</p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Health of the instrument</h3>
+              <p style="letter-spacing:0.06em; text-transform:uppercase; color:#595959; font-weight:700; margin:0.25rem 0 0.5rem;">Compliance &middot; Quality</p>
+              <p>Is the measurement instrument actually working &mdash; producing parseable output and reasoning coherently about the inputs it sees?</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- [eval slide 17] -->
+        <section>
+          <p class="slide-kicker">§5 · Compliance</p>
+          <h2>Compliance: does the output match the required structure?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Schema match. Are the fields, types, and labels what was requested?</p>
+            </article>
+            <article class="slide-card">
+              <h3>Metrics</h3>
+              <ul>
+                <li>% correct data type</li>
+                <li>% missing fields</li>
+                <li>Schema validation rate</li>
+              </ul>
+            </article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Compliance (stance detection)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established prompt</th>
+                  <th>Revised prompt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>99.98%</td><td>100.00%</td></tr>
+                <tr><td>GPT OSS</td><td>100.00%</td><td>100.00%</td></tr>
+                <tr><td>Phi 4</td><td>100.00%</td><td>100.00%</td></tr>
+                <tr><td>Qwen 3</td><td>100.00%</td><td>100.00%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Structured outputs delivered ~100% compliance across every cell.</p>
+          </div>
+        </section>
+
+        <!-- [eval slide 18] -->
+        <section>
+          <p class="slide-kicker">§5 · Accuracy</p>
+          <h2>Accuracy: how close to a reference value?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Closeness of measurements to a reference, whether objective ground truth or expert human judgment. Captures systematic deviation.</p>
+              <p style="color:#595959; margin-top:0.5rem;">Corresponds to validity in classical terms.</p>
+            </article>
+            <article class="slide-card">
+              <h3>Per-output metrics</h3>
+              <ul>
+                <li>Exact match</li>
+                <li>F1 score</li>
+                <li>Classification precision (PPV), recall</li>
+                <li>Correlation with human coding</li>
+              </ul>
+            </article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Accuracy (stance detection)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established prompt</th>
+                  <th>Revised prompt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td></tr>
+                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td></tr>
+                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td></tr>
+                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Are these differences real, or noise? The next slide answers that.</p>
+          </div>
+        </section>
+
+        <!-- [eval slide 19] -->
+        <section>
+          <p class="slide-kicker">§5 · Accuracy &middot; Signal vs. noise</p>
+          <h2>Statistical-difference tests separate signal from noise</h2>
+          <article class="slide-card" style="max-width:760px; margin:0.4rem auto 0;">
+            <h3>Tests</h3>
+            <ul>
+              <li><strong>McNemar:</strong> accuracy differences (paired)</li>
+              <li><strong>Kolmogorov-Smirnov:</strong> distribution differences</li>
+              <li><strong>Mann-Whitney U:</strong> median rank differences</li>
+              <li><strong>Wasserstein:</strong> overall distribution distance</li>
+              <li><strong>Welch's t:</strong> mean differences, unequal variance</li>
+            </ul>
+          </article>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Accuracy with McNemar (stance detection)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Established</th>
+                  <th>Revised</th>
+                  <th>McNemar &chi;&sup2;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>55.19%</td><td class="row-win">72.78%</td><td>272.0***</td></tr>
+                <tr><td>GPT OSS</td><td>70.61%</td><td>70.04%</td><td class="row-naive">153.0</td></tr>
+                <tr><td>Phi 4</td><td>45.59%</td><td class="row-win">47.58%</td><td>379.0***</td></tr>
+                <tr><td>Qwen 3</td><td>68.58%</td><td class="row-win">70.02%</td><td>280.0**</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">GPT OSS difference is noise (p &gt; 0.05); the framework directs you to the next criterion. <span style="color:#595959;">* p&lt;.05 &middot; ** p&lt;.01 &middot; *** p&lt;.001</span></p>
+          </div>
+        </section>
+
+        <!-- [eval slide 20] -->
+        <section>
+          <p class="slide-kicker">§5 · Precision</p>
+          <h2>Precision: how consistent across repeated runs?</h2>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr;">
+            <article class="slide-card">
+              <h3>What it measures</h3>
+              <p>Output consistency under repeated application to the same input. <strong>5+ iterations</strong>.</p>
+              <p style="color:#595959; margin-top:0.5rem;">Not the classification "precision" (PPV). Corresponds to reliability in classical terms.</p>
+            </article>
+            <article class="slide-card">
+              <h3>Metrics</h3>
+              <ul>
+                <li><strong>Agreement rate</strong> (categorical)</li>
+                <li><strong>Standard deviation</strong> (numeric)</li>
+                <li><strong>ICC</strong> (ordinal)</li>
+                <li><strong>Krippendorff's &alpha;</strong> (mixed types)</li>
+              </ul>
+            </article>
+          </div>
+          <div class="results-callout">
+            <p class="results-label">HQ2 case &middot; Precision (stance detection, 5 iterations)</p>
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">Model</th>
+                  <th colspan="2" class="th-group">Krippendorff's &alpha;</th>
+                  <th colspan="2" class="th-group">Agreement rate</th>
+                </tr>
+                <tr>
+                  <th class="th-sub">Established</th>
+                  <th class="th-sub">Revised</th>
+                  <th class="th-sub">Established</th>
+                  <th class="th-sub">Revised</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Command A</td><td>0.71</td><td class="row-win">0.95</td><td>86.97%</td><td class="row-win">98.01%</td></tr>
+                <tr><td>GPT OSS</td><td>0.89</td><td>0.90</td><td>96.06%</td><td>96.44%</td></tr>
+                <tr><td>Phi 4</td><td>0.72</td><td class="row-win">0.81</td><td>88.03%</td><td class="row-win">91.89%</td></tr>
+                <tr><td>Qwen 3</td><td>0.74</td><td class="row-win">0.83</td><td>89.77%</td><td class="row-win">93.52%</td></tr>
+              </tbody>
+            </table>
+            <p class="results-takeaway">Precision broke the tie for Command A: same accuracy region, dramatically tighter agreement.</p>
+          </div>
+        </section>
+
+        <!-- ════════ END IMPORTED slides ════════ -->
+
         <!-- Two response formats -->
         <section data-background-color="#ffffff">
           <p class="slide-kicker">Evaluation &middot; Protocol</p>
@@ -567,6 +956,45 @@ b) no</span><span class="pc-sec" data-comp="instructions">INSTRUCTIONS: Before r
             <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Accuracy</h3><p>How close to a reference value?</p></article>
             <article class="slide-card" style="border-top:4px solid #f1b300;"><h3>Precision</h3><p>How consistent across repeated runs?</p></article>
           </div>
+        </section>
+
+        <!-- Now an example: HQ2 stance-detection case -->
+        <section data-background-color="#ffffff">
+          <p class="slide-kicker">Evaluation &middot; Worked example</p>
+          <h2>Now an example</h2>
+          <p class="silver-note" style="text-align:center; max-width:1000px; margin:0 auto 0.55rem;">A single case carried through every criterion: stance detection on the Amazon HQ relocation debate.</p>
+          <div class="pillar-grid" style="grid-template-columns:1fr 1fr 1fr; font-size:0.95em;">
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Task</h3>
+              <p>Stance detection on 944 tweets regarding the Amazon HQ relocation.</p>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Models</h3>
+              <ul>
+                <li>Command A</li>
+                <li>GPT OSS</li>
+                <li>Phi 4</li>
+                <li>Qwen 3</li>
+              </ul>
+            </article>
+            <article class="slide-card" style="border-top:4px solid #f1b300;">
+              <h3>Prompt</h3>
+              <p>Two prompts compared:</p>
+              <ul>
+                <li>Established prompt</li>
+                <li>Revised prompt</li>
+              </ul>
+            </article>
+          </div>
+          <article class="slide-card" style="border-top:4px solid #595959; max-width:760px; margin:0.55rem auto 0;">
+            <h3>Structured output schema</h3>
+            <pre class="so-code">{
+  "stance": "Supportive | Neutral |
+             Unsupportive | Not about Amazon",
+  "confidence": 0.0,
+  "explanation": "string"
+}</pre>
+          </article>
         </section>
 
         <!-- Worked example: Compliance in action -->
