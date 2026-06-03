@@ -1549,18 +1549,8 @@
 .reveal .tdivider > * { position:relative; z-index:1; }
 .reveal .tdivider .gold-rule { margin:0.6rem auto 0.8rem; }
 
-/* ── Imported evaluation-presentation slides (class="eval-import") ──
-   The conceptual §-slides keep the original evaluation deck's roomier card
-   scale with left-justified text. Kickers intentionally fall back to this
-   deck's standard .slide-kicker so the evaluation section's kicker convention
-   matches every other section. Inline top-border colors travel with the markup. */
-.reveal .eval-import .slide-card { padding: 1rem 1.05rem; text-align: left; }
-.reveal .eval-import .slide-card h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.12; }
-.reveal .eval-import .slide-card p,
-.reveal .eval-import .slide-card li { font-size: 1rem; line-height: 1.42; text-align: left; }
-.reveal .eval-import .slide-card ul,
-.reveal .eval-import .slide-card ol { font-size: 1rem; }
-
-/* Evaluation-section slides on this deck's native card scale that should still
-   have left-justified card text (worked examples, Now an example, Quality). */
+/* ── Evaluation-section slides: left-justified card text on this deck's native
+   card scale, so the whole section (imported §-slides, worked examples,
+   Now an example, Quality) shares one consistent card style. Inline top-border
+   colors and per-card inline font sizes travel with the markup. */
 .reveal .eval-left .slide-card { text-align: left; }
